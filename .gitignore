@@ -1,3 +1,5 @@
+node_modules
+dist
 # Built application files
 *.apk
 *.ap_

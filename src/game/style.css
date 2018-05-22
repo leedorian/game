@@ -1,0 +1,422 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  background-color: #eeeff0;
+}
+
+#opt_main {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+#main {
+  display: none;
+  width: 100%;
+  height: 100%;
+  border: 1px black solid;
+  box-sizing: border-box;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.08) 2px 3px 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+#main {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#menu {
+  width: 100%;
+  /* max-width: 400px; */
+  height: 100%;
+  /* max-height:600px; */
+  overflow: hidden;
+  z-index: 0;
+  transition: margin-top .6s;
+}
+
+/* #menu.about{
+	margin-top:-600px;
+} */
+
+#about {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  position: absolute;
+  background-color: #f4f4f4;
+  font-size: 22px;
+}
+
+.tile, .stile {
+  width: 50%;
+  height: 33.33%;
+  position: relative;
+  background: #000;
+  float: left;
+  color: #fff;
+  font-weight: 700;
+  font-size: 37pt;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.stile {
+  height: 100px;
+  width: 100%;
+  font-size: 24px;
+  line-height: 100px;
+}
+
+.tile.tileW, .stile.stileW {
+  background: #fff;
+  color: #000;
+}
+
+.tile:nth-child(even) {
+  left: 0px;
+  transition: left .7s;
+}
+
+.tile:nth-child(odd) {
+  right: 0px;
+  transition: right .7s;
+}
+
+#menu.open .tile:nth-child(even) {
+  left: 500px;
+}
+
+#menu.open .tile:nth-child(odd) {
+  right: 500px;
+}
+
+#main canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #fff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.BlackText {
+  color: black;
+}
+
+#gameoverBlockwin {
+  transition: all ease 500ms;
+  position: absolute;
+  display: none;
+  opacity: 0.001;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-color: rgb(83, 215, 105);
+  font-weight: 700;
+  color: white;
+}
+
+.Name {
+  margin-top: 12px;
+  margin-left: 115px;
+  font-size: 11pt;
+  cursor: default;
+}
+
+.score {
+  font-size: 20pt;
+  margin: 40px 0 10px 0;
+  cursor: default;
+}
+.againLink{
+  padding: 10px 0 30px 0;
+  display: block;
+  text-decoration: underline;
+}
+
+.best {
+  font-size: 15pt;
+  margin-top: -15px;
+  cursor: default;
+}
+
+.footer a {
+  margin-right: 40px;
+  font-size: 20pt;
+  cursor: pointer;
+}
+
+.footer a:last-of-type {
+  margin-right: 0px;
+}
+
+
+.tile:hover {
+  -webkit-animation: jitter 0.3s linear infinite alternate;
+  -moz-animation: jitter 0.3s linear infinite alternate;
+  -ms-animation: jitter 0.3s linear infinite alternate;
+  animation: jitter 0.3s linear infinite alternate;
+}
+
+.blackBG {
+  position: absolute;
+  top: 00;
+  left: 0;
+  width: 398px;
+  height: 598px;
+  transition: background-color 700ms, z-index 0ms 0s;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 110;
+}
+
+.open .blackBG {
+  transition: background-color 700ms, z-index 0ms 700ms;
+  background: rgba(0, 0, 0, 0);
+  z-index: -1;
+}
+
+@-webkit-keyframes jitter {
+  from {
+    line-height: 187px;
+  }
+  to {
+    line-height: 207px;
+  }
+}
+
+@-moz-keyframes jitter {
+  from {
+    line-height: 187px;
+  }
+  to {
+    line-height: 207px;
+  }
+}
+
+@-ms-keyframes jitter {
+  from {
+    line-height: 187px;
+  }
+  to {
+    line-height: 207px;
+  }
+}
+
+@keyframes jitter {
+  from {
+    line-height: 187px;
+  }
+  to {
+    line-height: 207px;
+  }
+}
+
+.social {
+  width: 25px;
+  height: 25px;
+  box-shadow: inset 1px -1px 0 rgba(0, 0, 0, 0.15);
+  background: no-repeat center center;
+  background-size: 100%;
+  border-radius: 5px;
+  display: inline-block !important;
+}
+
+.share {
+  width: 133px;
+  height: 50px;
+  display: inline-block;
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  z-index: 200;
+  background-size: 100%;
+  cursor: pointer;
+  top: 0px;
+  transition: top .3s, visibility 0.3s, opacity .3s;
+}
+
+#f.show {
+  top: -52px;
+  visibility: visible;
+  opacity: 1;
+}
+
+#t.show {
+  top: -52px;
+  visibility: visible;
+  opacity: 1;
+}
+
+#g.show {
+  top: -106px;
+  visibility: visible;
+  opacity: 1;
+}
+
+#DESC {
+  display: none;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 200;
+  display: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.popup.show {
+  opacity: 1;
+}
+.popup .close{
+  position: absolute;
+  right: -13px;
+  top: -10px;
+  color: #fff;
+  border: 1px solid red;
+  border-radius: 13px;
+  width: 25px;
+  height: 25px;
+  background: red;
+  display: block;
+  line-height: 24px;
+}
+.popup .introCon{
+  padding-top:10px;
+  height:60px;
+}
+.magicButton{
+  border-radius: 8px;
+  background-color: #e5e5e5;
+  width:70%;
+  padding:10px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.magicButton .title{
+  padding-bottom: 5px;
+}
+.magicButton .sub{
+  font-size: .6rem;
+}
+#popupOverlay{
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
+#loadingOverlay{
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: #000;
+  z-index: 100;
+}
+#toolbar{
+    margin: 0;
+    padding: 3px 5px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+.tb_item{
+  margin-right: 5px;
+}
+#life {
+  float:left;
+  padding: 8px 0 0 10px;
+}
+
+#life i{
+  color: #ffac30;
+}
+#life .count,
+#coins .count{
+  font-weight: 400;
+  padding-left: 3px;
+}
+
+#messageBox{
+  float: left;
+  color: #bababa;
+  margin-right: 20px;
+}
+#messageBox.new{
+  color:#428cff;
+}
+#coins{
+  float: right;
+  padding: 8px 0 0 10px;
+}
+#topupbtn{
+  float: right;
+  color: #ff3730;
+  margin-right: 20px;
+}
+.fa-money{
+  color: gold;
+}
+#options{
+  float: right;
+}
+.linkOut{
+  text-decoration: underline;
+}
+
+#magicpopup h2,
+#topup h2{
+   font-size: 1rem;
+   padding: 0;
+   margin: 0;
+}
+#magicpopup button {
+  width:45%;
+  height:3rem;
+  border: 2px solid #fff;
+  background-color: black;
+  color:#fff;
+  font-size: 1rem;
+}
+#topup{
+  display: none;
+}
+#topup a{
+  font-size: 2rem;
+}
+#loadingAni{
+  position: absolute;
+  z-index: 110;
+  display: none;
+  color:#fff;
+}

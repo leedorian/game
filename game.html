@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title></title>
+  <meta name="keywords" content="games,game,html5,piano,tiles,white,black,step,puzzle,addictive" />
+  <meta name="description" content="Watch your step, DON'T TOUCH ANY WHITE TILES! This is the core rule of this addictive game. Sounds easy? Give it a try, and see how well you beat your friends best score.
+There are five modes in the game (classic, arcade,Zen, rush, and relay). Watch your steps and get a high score" />
+
+  <link rel="icon" href="logo.png" />
+  <script src="./static/piano.js" type="text/javascript"></script>
+  <script src="./static/script.js" type="text/javascript"></script>
+
+  <link href="./static/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <div id="opt_main">
+    <div id="main">
+      <!-- <div id="menu">
+        <div class="tile tileW" onClick="start(0)">经典</div>
+        <div class="tile" onClick="start(1)">街机</div>
+        <div class="tile" onClick="start(2)" style="transition-delay: 0.2s;">计时</div>
+        <div class="tile tileW" onClick="start(3)" style="transition-delay: 0.2s;">冲刺</div>
+        <div class="tile tileW" onClick="start(4)" style="transition-delay: 0.3s;">接力</div>
+        <div class="tile" style="transition-delay: 0.3s;" onclick='openOption();randomPlay();'>设置</div>
+        <div class="blackBG"></div>
+      </div>
+      <div class="popup" id="ratepopup">
+
+      </div>
+      <div class="popup" id="sharepopup">
+
+      </div> -->
+      <!-- <div id="about">
+        <div class="stile" onclick="closeOption();randomPlay();">返回主菜单</div>
+        <div class="stile stileW" id="soundType" onclick="changeSoundType(this)">声音: 钢琴</div>
+        <div class="stile stileW" id="showLetters" onclick="changeLetters(this)">Show Letters: ON</div>
+        <div class="stile" id="colorFul" onclick="changeColorful(this)">彩色: 开</div>
+      </div> -->
+      <div id="help" onClick="hideHelp()">
+        <p style="color: rgb(248,6,0);font-weight: 700;font-size: 21pt;margin-top: 165px;">不要触到任何白块!</p>
+        <p id="helpDetails" style="color: rgb(10,251,15);font-weight: 700;font-size: 17pt;margin-top: 5px;"></p>
+        <p style="color: rgb(235, 243, 236);font-weight: 700;font-size: 12pt;margin-top: 195px;"></p>
+      </div>
+      <canvas id="game" width="398" height="598" style=""></canvas>
+      <div id="gameoverBlock">
+        <p id="mode" class="mode">经典</p>
+        <p id="score" class="score BlackText">失败！</p>
+        <p id="best" class="best BlackText">最好成绩"</p>
+        <div id="footer" class="footer">
+          <!-- <a id="exit" onclick='randomPlay();'>退出</a> -->
+          <a id="again" onclick='hideShare()'>再来</a>
+        </div>
+      </div>
+
+      <div id="gameoverBlockwin">
+        <p class="mode">经典</p>
+        <p id="gscore" class="score BlackText">10.763"</p>
+        <p id="gbest" class="best BlackText">最好成绩 8.767"</p>
+        <div id="gfooter" class="footer">
+          <!-- <a id="exit" onclick='randomPlay();'>退出</a> -->
+          <a id="gagain" onclick='hideShare()'>再来</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
