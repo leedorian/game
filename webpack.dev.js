@@ -9,7 +9,7 @@ module.exports = merge(common, {
     port: 7700,
     host: '0.0.0.0',
     historyApiFallback: true,
-    contentBase: './dist',
+    contentBase: './cordova/www',
   },
   devtool: 'inline-source-map',
   plugins: [

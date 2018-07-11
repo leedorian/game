@@ -30,7 +30,7 @@ import {
   HandleCloseModal,
   HandleSendSMS,
 } from '../../commons/utils';
-import SMS from '../sms';
+import SMS from '../commons/sms';
 
 export default class PassReset extends Component {
   constructor(props) {

@@ -2,18 +2,33 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 // env
-const buildDirectory = 'dist';
+const buildDirectory = 'cordova/www';
 
 module.exports = {
   entry: {
-    app: './src/index.jsx',
+    app: ['babel-polyfill', './src/index.jsx'],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   output: {
     path: path.resolve(__dirname, buildDirectory),
-    filename: '[name].bundle.js',
+    filename: '[name].[chunkhash].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          name: 'common',
+          test: /\/commons\//,
+          priority: 10,
+          reuseExistingChunk: true,
+          minChunks: 2,
+          enforce: true,
+        },
+      },
+    },
   },
   module: {
     rules: [{
@@ -36,7 +51,7 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'Development',
+      title: 'Joy Cells',
       template: './src/index.html',
     }),
     // new webpack.optimize.SplitChunksPlugin({

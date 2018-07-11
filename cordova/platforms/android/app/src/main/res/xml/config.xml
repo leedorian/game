@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="cn.joycells" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="HotCodePush">
+        <param name="android-package" value="com.nordnetab.chcp.main.HotCodePushPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="Wechat">
+        <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>别碰白块</name>
+    <description>
+    </description>
+    <author email="leedorian@gmail.com" href="http://joycells.cn">
+        Joy Cells
+    </author>
+    <content src="game.html" />
+    <access origin="*" />
+    <allow-navigation href="*://47.98.97.163:8011/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <chcp>
+        <config-file url="http://47.98.97.163:8011/game/chcp.json" />
+        <native-interface version="1" />
+    </chcp>
+    <allow-intent href="market:*" />
+    <icon density="ldpi" src="res/android/icon36.png" />
+    <icon density="mdpi" src="res/android/icon48.png" />
+    <icon density="hdpi" src="res/android/icon72.png" />
+    <icon density="xhdpi" src="res/android/icon96.png" />
+    <icon density="xxhdpi" src="res/android/icon144.png" />
+    <icon density="xxxhdpi" src="res/android/icon192.png" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="loadUrlTimeoutValue" value="60000" />
+    <preference name="WECHATAPPID" value="wxde833bddadcdeb1d" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="orientation" value="portrait" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+</widget>

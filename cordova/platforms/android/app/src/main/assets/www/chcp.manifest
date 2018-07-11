@@ -1,0 +1,274 @@
+[
+  {
+    "file": "app.min.js",
+    "hash": "d9d0981eb9752f55e29a8a30c43fa349"
+  },
+  {
+    "file": "cordova_redirect.html",
+    "hash": "70b038c12fd8113f32fb3426857d5601"
+  },
+  {
+    "file": "game.html",
+    "hash": "8ad01dfc071e850dc63354027cd7f935"
+  },
+  {
+    "file": "images/bg.png",
+    "hash": "71b5cda8923250320eb852d66626c3fa"
+  },
+  {
+    "file": "images/bugani.png",
+    "hash": "2f38703a7f35ba234578ff72968e0eeb"
+  },
+  {
+    "file": "images/bugJump.png",
+    "hash": "b2a6a96f7e89f8922a3ac6d41237f520"
+  },
+  {
+    "file": "images/buttonBg.png",
+    "hash": "e76494a134432e994cda1d7c4a98d714"
+  },
+  {
+    "file": "images/buttonGrayBg.png",
+    "hash": "a613612ea4571db76f95a5da45961e4d"
+  },
+  {
+    "file": "images/buttonPlay.png",
+    "hash": "7ea46db7ba30ba34e4dcc9e4b0de76f1"
+  },
+  {
+    "file": "images/buylife.png",
+    "hash": "a070f542b7336c44c1bcc09563c83a31"
+  },
+  {
+    "file": "images/centipede-sprite.png",
+    "hash": "1442455503158f811fa8a94583137287"
+  },
+  {
+    "file": "images/FontLive@2x.png",
+    "hash": "ac4d06773caf6bab756e912bc828f07c"
+  },
+  {
+    "file": "images/FontMobileLogin@2x.png",
+    "hash": "b0a10205eda4494bed1378041e4ac459"
+  },
+  {
+    "file": "images/Fontnews@2x.png",
+    "hash": "a8caf1c3e88378139f2c4a7d784f4b80"
+  },
+  {
+    "file": "images/FontOption@2x.png",
+    "hash": "c7e09fee171459a3711239625c4a4e91"
+  },
+  {
+    "file": "images/FontRank@2x.png",
+    "hash": "ce2d1d83a5a6e2265e8436130f7095f8"
+  },
+  {
+    "file": "images/FontSlow@2x.png",
+    "hash": "d34901d59b7f898d1bf46e0815fa2953"
+  },
+  {
+    "file": "images/gameLogo.png",
+    "hash": "ab89f57116be6a81e7cc71d24eb7f0ab"
+  },
+  {
+    "file": "images/headMoren.png",
+    "hash": "55244e8f51a800bb09c2813ca017f39c"
+  },
+  {
+    "file": "images/iconAdd.png",
+    "hash": "956f8cfadbab29a2cb73a4ae8323f4a4"
+  },
+  {
+    "file": "images/iconApple.png",
+    "hash": "0a4e3546d6317cb0c12bec99563752e8"
+  },
+  {
+    "file": "images/iconAppleFilled.png",
+    "hash": "1d029807c00810eed1e4c2ca0ecb3f3a"
+  },
+  {
+    "file": "images/iconClose.png",
+    "hash": "dfa2a54882a3d40cf0c39bb4a9edf08f"
+  },
+  {
+    "file": "images/iconGold.png",
+    "hash": "9248779e724feeb8eeae2df4d35ae2c7"
+  },
+  {
+    "file": "images/iconNews.png",
+    "hash": "36e5b52346c3e66cdeaf113421716b84"
+  },
+  {
+    "file": "images/iconOption.png",
+    "hash": "f9f23da173faf46c8efadf1b5043e17a"
+  },
+  {
+    "file": "images/iconRank.png",
+    "hash": "6707c004f6cfd1d5fcbdafde3653f5bd"
+  },
+  {
+    "file": "images/Login@2x.png",
+    "hash": "cbfc75c2c17b3778cde30effa343949f"
+  },
+  {
+    "file": "images/menuBG.png",
+    "hash": "45eff3ba1172102466e2bb872478ce87"
+  },
+  {
+    "file": "images/menuBG2.png",
+    "hash": "c6fb5613e351ce13c561e04774fea9ec"
+  },
+  {
+    "file": "images/No1.png",
+    "hash": "09391f8232f2f476806fe9d2c6145c9a"
+  },
+  {
+    "file": "images/No2.png",
+    "hash": "3fed75f259fa69ec70801a385bf16c02"
+  },
+  {
+    "file": "images/No3.png",
+    "hash": "a512ab72611aa909dfd569c94d0db513"
+  },
+  {
+    "file": "images/revive.png",
+    "hash": "784e2542a8983e2998e5848e623af408"
+  },
+  {
+    "file": "images/slow.png",
+    "hash": "2b578536543d1fe9c83e9efa7d590586"
+  },
+  {
+    "file": "images/title@2x.png",
+    "hash": "d9b712c8c3c3752618c107490646cf61"
+  },
+  {
+    "file": "index.html",
+    "hash": "23c593fb3dafba4485093a8597e67bb6"
+  },
+  {
+    "file": "jquery.2.1.4.min.js",
+    "hash": "b0dc11d0a434aafe88908c7f33d71095"
+  },
+  {
+    "file": "piano.min.js",
+    "hash": "cdc5c5b601055e3fead713520b610269"
+  },
+  {
+    "file": "piano/soundA.mp3",
+    "hash": "9d1eecb5ee34d33efa13ecf9677aac9d"
+  },
+  {
+    "file": "piano/soundB.mp3",
+    "hash": "0c3ce9610106ac743b4afe7075f86fd4"
+  },
+  {
+    "file": "piano/soundC.mp3",
+    "hash": "0ad22b23f4dbd2ddcccb2ddaa747c2c5"
+  },
+  {
+    "file": "piano/soundD.mp3",
+    "hash": "c648ebd40979620fefc87094a1a3a904"
+  },
+  {
+    "file": "piano/soundE.mp3",
+    "hash": "9ae392dfbb107b677e6f5ad98cc49f83"
+  },
+  {
+    "file": "piano/soundF.mp3",
+    "hash": "8bccafe65f416fefffd8a7ac22560441"
+  },
+  {
+    "file": "piano/soundG.mp3",
+    "hash": "11334763663929eaa93f79790b7105f0"
+  },
+  {
+    "file": "piano/soundH.mp3",
+    "hash": "b7ffefc747319ad697e08148f5d7bca1"
+  },
+  {
+    "file": "piano/soundI.mp3",
+    "hash": "497ac352638302660a621d3f039e475d"
+  },
+  {
+    "file": "piano/soundJ.mp3",
+    "hash": "9a3c3abb754b3a399dfc13e17dd72d56"
+  },
+  {
+    "file": "piano/soundK.mp3",
+    "hash": "6d559f7de4b9a8919b1f34f109fd6c29"
+  },
+  {
+    "file": "piano/soundL.mp3",
+    "hash": "0e54fc63b13786cf9705d7a5bcd63ad6"
+  },
+  {
+    "file": "piano/soundM.mp3",
+    "hash": "10ebffff621d039530159b7da956af1d"
+  },
+  {
+    "file": "piano/soundN.mp3",
+    "hash": "12f0975aac62a68642c12a5a200d38a3"
+  },
+  {
+    "file": "piano/soundO.mp3",
+    "hash": "00d096ce292e049ad8dfcd81c3ead154"
+  },
+  {
+    "file": "piano/soundP.mp3",
+    "hash": "1b9f0a6247c263a11634a4ef4b58f61f"
+  },
+  {
+    "file": "piano/soundQ.mp3",
+    "hash": "4b1c2b654139f57be3a509a5ac3ad44b"
+  },
+  {
+    "file": "piano/soundR.mp3",
+    "hash": "c381b501bfec03902ec15cbb6934cd55"
+  },
+  {
+    "file": "piano/soundS.mp3",
+    "hash": "6e28719d0b0efd2088a132f954b45b59"
+  },
+  {
+    "file": "piano/soundT.mp3",
+    "hash": "ecae72abbecdc4a3fe0b91f894ad3450"
+  },
+  {
+    "file": "piano/soundU.mp3",
+    "hash": "f60e89da4dc0373426f297cde89c4712"
+  },
+  {
+    "file": "piano/soundV.mp3",
+    "hash": "ca0bed68a3840bf688bbf12bd873691f"
+  },
+  {
+    "file": "piano/soundW.mp3",
+    "hash": "fe633694038551e516676ece835d9669"
+  },
+  {
+    "file": "piano/soundX.mp3",
+    "hash": "22f0009e39f63fddece597df02c9e331"
+  },
+  {
+    "file": "piano/soundY.mp3",
+    "hash": "1e086497404018502667880638c0553b"
+  },
+  {
+    "file": "piano/soundZ.mp3",
+    "hash": "193417a77a39fe39c1012f97c8fa3dfa"
+  },
+  {
+    "file": "script.min.js",
+    "hash": "9ead8a67e862dd0ec72c4db7ec5b6728"
+  },
+  {
+    "file": "sprite.min.js",
+    "hash": "c83a33abb1489b5fd0271f0c3d9cf955"
+  },
+  {
+    "file": "style.css",
+    "hash": "ec022732c714c86481913e8d6add7f80"
+  }
+]

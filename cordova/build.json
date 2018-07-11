@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "../../android/keystore/joycells",
+            "storePassword": "passw0rd",
+            "alias": "joycellskey0",
+            "password" : "passw0rd",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "../../android/keystore/joycells",
+            "storePassword": "passw0rd",
+            "alias": "joycellskey0",
+            "password" : "passw0rd",
+            "keystoreType": ""
+        }
+    }
+}

@@ -33,7 +33,7 @@ import {
   HandleSendSMS,
 } from '../../commons/utils';
 
-import SMS from '../sms';
+import SMS from '../commons/sms';
 
 export default class Register extends Component {
   constructor(props) {
