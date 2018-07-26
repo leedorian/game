@@ -19,11 +19,11 @@
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "cn.joycells"
     },
-    "cordova-plugin-wechat": {
-      "WECHATAPPID": "wxde833bddadcdeb1d",
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "cn.joycells"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-wechatv2": {
+      "WECHATAPPID": "wxde833bddadcdeb1d",
       "PACKAGE_NAME": "cn.joycells"
     }
   },

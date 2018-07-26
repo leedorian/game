@@ -39,10 +39,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-wechat": {
+  "cordova-plugin-wechatv2": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-wechat@2.1.0"
+      "id": "cordova-plugin-wechatv2@2.1.3"
     },
     "is_top_level": true,
     "variables": {

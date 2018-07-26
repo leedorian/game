@@ -10,6 +10,9 @@ body{
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   background-color: #eeeff0;
 }
+*:focus {
+    outline: none;
+}
 ul{
     list-style: none;
     padding: 0;
@@ -19,6 +22,12 @@ button{
   border: none;
   padding:0;
   font-weight: normal;
+}
+.clr::after{
+  content: '';
+  height:0;
+  width: 0;
+  clear:both;
 }
 .loadingResource{
   width: 100%;
@@ -277,7 +286,8 @@ button{
   max-height: 400px;
 }
 
-.popup .close{
+.popup .close,
+#alert .close{
   position: absolute;
   right: -20px;
   top: -20px;
@@ -332,6 +342,7 @@ button{
   display: block;
   width: 77px;
   height:30px;
+  line-height: 30px;
   border:0;
   background-image: url(./images/buttonBg.png);
   background-repeat: no-repeat;
@@ -698,6 +709,113 @@ button{
   left: 0;
   top: 0;
   width: 1px;
+}
+.coinsPopup ul{
+  text-align: left;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.coinsPopup li{
+  display: block;
+  color: #A63910;
+  background-color: #FBD39F;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  padding:5px;
+  font-size: 12px;
+}
+.coinsPopup li:after{
+  content: '';
+  height:0;
+  width: 0;
+  clear:both;
+  display: block;
+}
+.coinsPopup li .ico{
+  float: left;
+  height:40px;
+  width: 40px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 10px;
+}
+.coinsPopup li:first-child .ico{
+  background-image: url(./images/sp1@2x.png);
+}
+.coinsPopup li:nth-child(2) .ico{
+  background-image: url(./images/sp2@2x.png);
+}
+.coinsPopup li:nth-child(3) .ico{
+  background-image: url(./images/sp3@2x.png);
+}
+.coinsPopup li:nth-child(4) .ico{
+  background-image: url(./images/sp4@2x.png);
+}
+.coinsPopup li:nth-child(5) .ico{
+  background-image: url(./images/sp5@2x.png);
+}
+.coinsPopup li .number{
+  width: 100px;
+  box-sizing: border-box;
+  text-align: left;
+  float: left;
+  line-height: 17px;
+  padding-left: 19px;
+  background-image: url(./images/iconGold.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 12px;
+}
+.coinsPopup li .button01{
+  float: right;
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: center;
+}
+.coinsPopup .payBy{
+  text-align: left;
+}
+.coinsPopup .payBy img{
+  margin-right:5px;
+}
+.coinsPopup .payBy .wechat{
+  font-size: 14px;
+  color: #A63910;
+}
+#alert{
+  position: fixed;
+  bottom:0;
+  height: 60px;
+  width: 100%;
+  z-index: 1000;
+  color: #fff;
+  text-align: left;
+  padding:6px 0 10px 55px;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size:40px;
+  background-position: 5px;
+  display: none;
+}
+#alert .close{
+  right:0px;
+}
+#alert h3{
+  margin:0;
+}
+#alert.success{
+  background-color: #39DA92;
+  background-image: url(./images/cg@2x.png);
+
+}
+#alert.warning{
+  background-color: #EC8811;
+  background-image: url(./images/jg@2x.png);
+}
+#alert.error{
+  background-color: #DC2222;
+  background-image: url(./images/wrong@2x.png);
 }
 
 @media (max-width: 480px) {

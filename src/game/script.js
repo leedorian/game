@@ -164,6 +164,7 @@
 
   //initial
   var props;
+  var iniLoad = true;
   function fnGetPropList(){
     return $.ajax({
       dataType: "json",
@@ -174,6 +175,7 @@
         if ( status === -238) {
 
           $(".loginByPhoneButton,.loginByWechatButton").show();
+          $(".GgameTools").hide();
           $("#startGameButton").hide();
         }else if (status >= 0 ) {
           props = data.rows;
@@ -182,7 +184,7 @@
           $("#coins .count").html(parseInt(data.money,10));
           $("#nickName").val(data.nick);
           $("#avatarImage").attr("src", data.photo);
-          fnGetLive();
+
           $(".loginByPhoneButton,.loginByWechatButton").hide();
           $("#startGameButton").show();
         }else {
@@ -194,14 +196,14 @@
   fnGetPropList();
 
   function fnGetLive(){
-    $.ajax({
+    return $.ajax({
       dataType: "json",
       url: serviceRoot + "index.php?m=game&v=getActionPoint",
       xhrFields: { withCredentials: true },
       success: function (data) {
         var status = parseInt(data.status, 10);
         if ( status === -238) {
-          showPopup("loginButtonPopup");
+          // showPopup("loginButtonPopup");
         }else if (status >= 0 ) {
           life = parseInt(data.data, 10);
           updateLife();
@@ -211,7 +213,7 @@
       }
     });
   }
-
+  fnGetLive();
   var gameModes = {
       CLASSIC: 0,
       ARCADE: 1,
@@ -439,19 +441,21 @@ function update() {
       if (y < LastTileY + nTileHeight && y > LastTileY) keyboardListener({
           keyCode: keysArray[parseInt((x + 1) / nTileWidth)]
       })
-    }else if (life == 0) {
+    }else if (life <= 0) {
       showPopup("topup");
     }
     e.preventDefault();
   };
   function updateLife() {
     var nApple = life;
+    var nAddLife = 0;
     $("#life .apple > div").removeClass("filled");
     if (life > 5) {
-      nApple = 5
+      nApple = 5;
+      nAddLife = life - 5;
     }
     $("#life .apple > div:nth-child(-n+" + nApple + ")").addClass("filled");
-    $("#life .count").html(life - 5);
+    $("#life .count").html();
   }
   function drawTile() {
       for (var i = 0; i < tilesArray.length; i++) {
@@ -511,6 +515,7 @@ function update() {
 
   function stopGame() {
       hidePopup("magicpopup");
+      isPause = false;
       keyListener = false;
       updateInterval = false;
       // var gameoverBlockS = document.getElementById("gameoverBlock").style;
@@ -546,25 +551,7 @@ function update() {
 
       $("#toolbar").show();
       showPopup("gameoverBlock");
-      // gameoverBlockS.transition = "";
-      // gameoverBlockS.opacity = .9;
-      // gameoverBlockS.display = "block";
-      // gameoverBlockS.backgroundColor = errorTile[3] == 0 ? "rgb(251,62,56)" : "rgb(166,166,166)";
-      // gameoverBlockS.left = errorTile[0] * 100 + "px";
-      // gameoverBlockS.top = errorTile[1] + 2 + "px";
-      // gameoverBlockS.width = "98px";
-      // gameoverBlockS.height = "148px";
-      // document.getElementById("gameoverBlock").classList.remove("show");
-      // gameoverBlockS.transition = "all ease 500ms";
-      // setTimeout(function() {
-      //     var gameoverBlockS = document.getElementById("gameoverBlock").style;
-      //     gameoverBlockS.opacity = 1;
-      //     gameoverBlockS.left = 0;
-      //     gameoverBlockS.top = 0;
-      //     gameoverBlockS.width = nCanvasWidth + "px";
-      //     gameoverBlockS.height = nCanvasHeight + "px";
-      //     document.getElementById("gameoverBlock").classList.add("show")
-      // }, 40)
+
   }
 
   function modeStart(bRevive) {
@@ -640,40 +627,6 @@ function update() {
   }
 
 
-  // function getScoreScreen() {
-  //     keyListener = false;
-  //     speedY = 17;
-  //     if (greenTileY >= -12) {
-  //         updateInterval = false;
-  //         var gameoverBlockSW = document.getElementById("gameoverBlockwin").style;
-  //         var gbestp = document.getElementById("gbest");
-  //         var bestEver = localStorage["best_" + nowMode];
-  //         if (parseFloat(nowScore) < parseFloat(bestEver)) {
-  //             localStorage["best_" + nowMode] = nowScore;
-  //             gbestp.innerHTML = "新纪录";
-  //             cheerPlay()
-  //         } else if (bestEver) gbestp.innerHTML = "新纪录 " + bestEver;
-  //         else {
-  //             localStorage["best_" + nowMode] = nowScore;
-  //             gbestp.innerHTML = "新纪录";
-  //             cheerPlay()
-  //         }
-  //         document.getElementById("gscore").innerHTML =
-  //             nowScore;
-  //         gameoverBlockSW.transition = "";
-  //         gameoverBlockSW.opacity = .001;
-  //         gameoverBlockSW.display = "block";
-  //         gameoverBlockSW.transition = "opacity ease 500ms";
-  //         gameoverBlockSW.width = "98px";
-  //         gameoverBlockSW.height = "148px";
-  //         setTimeout(function() {
-  //             var gameoverBlockSW = document.getElementById("gameoverBlockwin").style;
-  //             gameoverBlockSW.opacity = 1;
-  //             gameoverBlockSW.width = nCanvasWidth + "px";
-  //             gameoverBlockSW.height = nCanvasHeight + "px";
-  //         }, 40)
-  //     }
-  // }
 
   function getAnimation(number, time, endtime) {
       return Math.min(number * (time / endtime), number)
@@ -956,14 +909,18 @@ function update() {
         success: function (data) {
           var status = parseInt(data.status, 10);
           if ( status === -238) {
+            hidePopup("magicpopup");
             showPopup("loginButtonPopup");
+            isPause = false;
           }else if (status >= 0 ) {
             speedY = normalSpeed;
             tempSpeedY = undefined;
+            isPause = false;
             $("#coins .count").html(parseInt(data.money,10));
+            hidePopup("magicpopup");
           }else if (status === -205) {
               //not enough coins
-              alert("todo not enough coins");
+              showCoinsPopup();
           }
         }
       });
@@ -974,8 +931,9 @@ function update() {
     }else {
       speedY = tempSpeedY;
       tempSpeedY = undefined;
+      isPause = false;
     }
-    isPause = false;
+
   }
   function handleOrientation(event) {
     var x = event.beta;  // In degree in the range [-180,180]
@@ -1028,13 +986,29 @@ function update() {
           againHandler(null, true);
         }else if (status === -205) {
             //not enough coins
-            alert("todo not enough coins");
+            showCoinsPopup();
         }
       }
     });
   }
   $("#startGameButton").on("click", function () {
-    $(".GstartScreen").hide();
+    fnGetPropList().done(function (data) {
+      var status = parseInt(data.status, 10);
+      if ( status === -238) {
+        showPopup("loginButtonPopup");
+      }else if (status >= 0 ) {
+        fnGetLive().done(function () {
+          if (life <= 0) {
+            showPopup("topup");
+          }else{
+            $(".GstartScreen").hide();
+          }
+        });
+
+      }
+    });
+
+
   });
   $(".reviveButton").on("click", revive);
 
@@ -1097,6 +1071,9 @@ function update() {
             hidePopup("loginPopup");
             fnGetPropList();
             fnGetLive();
+            if ($(".fakeBG").is(":visible")) {
+              $('.GgameTools').show();
+            }
           },
           dataType: 'json'
         });
@@ -1158,7 +1135,7 @@ function update() {
       }else if (status >= 0 ) {
         showPopup("settingPopup");
       }
-    })
+    });
 
   });
   $("#topup .priceButton").click(function () {
@@ -1237,37 +1214,244 @@ function update() {
     state = "_" + (+new Date());
     Wechat.auth(scope, state, function (response) {
         // you may use response.code to get the access token.
-        $("#nickName").val(JSON.stringify(response));
+        if (response.code) {
+            $.ajax({
+              type: "GET",
+              url: serviceRoot + "index.php?m=member&f=index&v=auth&type=weixin&code=" + response.code,
+              success: function (data) {
+                var status = parseInt(data.status, 10);
+                if (status >= 0 ) {
+                   hidePopup("loginPopup");
+                   fnGetPropList();
+                   fnGetLive();
+                   if ($(".fakeBG").is(":visible")) {
+                     $('.GgameTools').show();
+                   }
+                }else {
+                  alert(data.reason);
+                }
+              },
+              dataType: 'json'
+            });
+        }
     }, function (reason) {
         alert("Failed: " + reason);
     });
   });
 
+  $("#coinsPopup").on("click", ".button01", function (e) {
+    var $tar = $(e.target);
+    var sId = $tar.data("id");
+    var sNum = $tar.data("num");
+    $.ajax({
+      type: "POST",
+      url: serviceRoot + "index.php?m=game&f=pay&v=unifiedOrder",
+      data: {
+        fid: sId
+      },
+      success: function (data) {
+        // console.log(data);
+        if (data.status >= 0) {
+          var params = {
+              partnerid: data.mch_id, // merchant id
+              prepayid: data.prepay_id, // prepay id
+              noncestr: data.nonce_str, // nonce
+              timestamp: data.timeStamp.toString(), // timestamp
+              sign: data.paysign, // signed string
+          };
 
+          Wechat.sendPaymentRequest(params, function () {
+              $.ajax({
+                type: "POST",
+                url: serviceRoot + "index.php?m=game&f=pay&v=procssOrder",
+                data: {
+                  out_trade_no: data.out_trade_no
+                },
+                success: function (data) {
+                  // console.log(data);
+                  if (data.status >= 0) {
+                    fnGetPropList();
+                    hidePopup("coinsPopup");
+                    showAlert({
+                      msg: "购买成功",
+                      title: "您已成功购买" + sNum + "个金币",
+                      type: 'success'
+                    });
+                  }else if ( data.status == -238) {
+                    showPopup("loginButtonPopup");
+                  }
+
+                },
+                dataType: 'json'
+              });
+          }, function (reason) {
+              showAlert({
+                msg: reason,
+                title: "支付失败",
+                type: 'warning'
+              });
+          });
+        }else if ( data.status == -238) {
+          showPopup("loginButtonPopup");
+        }
+
+      },
+      dataType: 'json'
+    });
+  });
+  $(".buyCoins").click(showCoinsPopup);
+
+  function showCoinsPopup() {
+    $.ajax({
+      type: "GET",
+      url: serviceRoot + "index.php?m=game&f=index&v=getCoinlist",
+      success: function (data) {
+        var status = parseInt(data.status, 10);
+        if (status >= 0 ) {
+           // console.log(data.rows);
+           var $coinList = $("#coinsPopup ul");
+           $coinList.html("");
+           for (var i = 0; i < data.rows.length; i++) {
+             $coinList.append('<li><div class="ico"></div><div class="button01" data-num="' + data.rows[i].num + '" data-id="' + data.rows[i].id + '">￥'+ data.rows[i].price +'</div><div class="number">'+ data.rows[i].num +'</div></li>');
+           }
+           showPopup("coinsPopup");
+        }else if ( data.status == -238) {
+          showPopup("loginButtonPopup");
+        }
+      },
+      dataType: 'json'
+    });
+
+  }
+
+  function showAlert(msg) {
+    var $alert = $("#alert");
+    $alert.find("h3").html(msg.title);
+    $alert.find(".msg").html(msg.msg);
+    switch (msg.type) {
+      case 'success':
+        $alert.attr('class', 'success');
+        break;
+      case 'warning':
+        $alert.attr('class', 'warning');
+        break;
+      case 'error':
+        $alert.attr('class', 'error');
+        break;
+      default:
+
+    }
+    $alert.show();
+    window.setTimeout(function () {
+      $alert.hide();
+    }, 5000);
+  }
+  $("#alert .close").click(function (e) {
+    $("#alert").hide();
+  });
   // Change image source
   function onSuccess(imageData) {
     // alert(imageData);
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+    window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function (fs) {
     console.log('file system open: ' + fs.name);
-    fs.root.getFile(imageData, { create: true, exclusive: false }, function (fileEntry) {
-            fileEntry.file(function (file) {
-                var reader = new FileReader();
-                reader.onloadend = function() {
-                    // Create a blob based on the FileReader "result", which we asked to be retrieved as an ArrayBuffer
-                    var blob = new Blob([new Uint8Array(this.result)], { type: "image/png" });
-                    var oReq = new XMLHttpRequest();
-                    oReq.open("POST", "http://mysweeturl.com/upload_handler", true);
-                    oReq.onload = function (oEvent) {
-                        // all done!
-                    };
-                    // Pass the blob in to XHR's send method
-                    oReq.send(blob);
-                };
-                // Read the file as an ArrayBuffer
-                reader.readAsArrayBuffer(file);
-            }, function (err) { console.error('error getting fileentry file!' + err); });
-        }, function (err) { console.error('error getting file! ' + err); });
-    }, function (err) { console.error('error getting persistent fs! ' + err); });
+    window.resolveLocalFileSystemURL(imageData, function (fileEntry) {
+      fileEntry.file(function (file) {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+              // Create a blob based on the FileReader "result", which we asked to be retrieved as an ArrayBuffer
+               var BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+               var aImage = [new Uint8Array(this.result)];
+
+                if(BlobBuilder) {
+                    // android
+                    var oBuilder = new BlobBuilder();
+                    oBuilder.append(aImage[0]);
+                    var blob = oBuilder.getBlob("image\/jpg"); // the blob
+
+                } else {
+                    // everyone else
+                    var blob = new Blob(aImage, { 'type': 'image/jpg' });
+                }
+              // var blob = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
+              $("#buttonSaveAvatar").off("click.avatar").on("click.avatar",function (e) {
+                var $tar = $(e.target);
+                var fd = new FormData();
+                  // fd.append('file', 'avatar.jpg');
+                fd.append('file', blob);
+                $.ajax({
+                    type: 'POST',
+                    url: serviceRoot + "index.php?m=member&f=index&v=avatar2",
+                    data: fd,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false
+                }).done(function(data) {
+                  if (parseInt(data.status, 10) >= 0) {
+                    showAlert({
+                      msg: "设置-头像",
+                      title: '头像保存成功',
+                      type: 'success'
+                    });
+                    $tar.off("click.avatar");
+                  }else {
+                    showAlert({
+                      msg: "设置-头像",
+                      title: '头像保存失败:' + data.reason,
+                      type: 'error'
+                    });
+                  }
+
+                });
+              });
+
+              // var oReq = new XMLHttpRequest();
+              // oReq.open("POST", serviceRoot + "index.php?m=member&f=index&v=avatar2", true);
+              // oReq.setRequestHeader('Content-Type', 'image/jpg');
+              // oReq.onload = function (oEvent) {
+              //     alert('success uploaded');
+              //     // all done!
+              // };
+              // // Pass the blob in to XHR's send method
+              // oReq.send(blob);
+          };
+          // Read the file as an ArrayBuffer
+          reader.readAsArrayBuffer(file);
+      }, function (err) {
+        console.error('error getting fileentry file!');
+        console.error(err);
+      });
+    }, function (err) {
+      console.log(err);
+    });
+    // fs.root.getFile(imageData, { create: true, exclusive: false }, function (fileEntry) {
+    //         fileEntry.file(function (file) {
+    //             var reader = new FileReader();
+    //             reader.onloadend = function() {
+    //                 // Create a blob based on the FileReader "result", which we asked to be retrieved as an ArrayBuffer
+    //                 var blob = new Blob([new Uint8Array(this.result)], { type: "image/png" });
+    //                 var oReq = new XMLHttpRequest();
+    //                 oReq.open("POST", "index.php?m=member&f=index&v=avatar2", true);
+    //                 oReq.onload = function (oEvent) {
+    //                     alert('success uploaded');
+    //                     // all done!
+    //                 };
+    //                 // Pass the blob in to XHR's send method
+    //                 oReq.send(blob);
+    //             };
+    //             // Read the file as an ArrayBuffer
+    //             reader.readAsArrayBuffer(file);
+    //         }, function (err) {
+    //           console.error('error getting fileentry file!');
+    //           console.error(err);
+    //         });
+    //     }, function (err) {
+    //       console.error('error getting file! ' );
+    //       console.error(err);
+    //     });
+    }, function (err) {
+      console.log('error getting persistent fs! ' + err);
+      console.log(err);
+     });
       var image = document.getElementById('avatarImage');
       image.src = imageData + '?' + Math.random();;
   }
@@ -1315,9 +1499,8 @@ function update() {
   // window.addEventListener('resize', resizeGame, false);
   // window.addEventListener('load', resizeGame, false);
   // window.addEventListener('orientationchange', resizeGame, false);
-  // showPopup("loginButtonPopup");
+  // showPopup("coinsPopup");
   document.addEventListener("deviceready", onDeviceReady, false);
-
 
   function onDeviceReady() {
     // alert("hot7");

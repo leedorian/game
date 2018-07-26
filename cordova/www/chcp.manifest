@@ -9,7 +9,7 @@
   },
   {
     "file": "game.html",
-    "hash": "8ad01dfc071e850dc63354027cd7f935"
+    "hash": "f680398be74522d575a2f0ce0753d517"
   },
   {
     "file": "images/bg.png",
@@ -44,6 +44,14 @@
     "hash": "1442455503158f811fa8a94583137287"
   },
   {
+    "file": "images/cg@2x.png",
+    "hash": "ff0eedfc53a6fe2e999f163967589fc4"
+  },
+  {
+    "file": "images/FontBuy@2x.png",
+    "hash": "92788d2ec7193cd9bf120d7e204a317d"
+  },
+  {
     "file": "images/FontLive@2x.png",
     "hash": "ac4d06773caf6bab756e912bc828f07c"
   },
@@ -66,6 +74,10 @@
   {
     "file": "images/FontSlow@2x.png",
     "hash": "d34901d59b7f898d1bf46e0815fa2953"
+  },
+  {
+    "file": "images/FontTili@2x.png",
+    "hash": "f37c65f56dbb1f54be11c33c1c930726"
   },
   {
     "file": "images/gameLogo.png",
@@ -108,6 +120,10 @@
     "hash": "6707c004f6cfd1d5fcbdafde3653f5bd"
   },
   {
+    "file": "images/jg@2x.png",
+    "hash": "c4deba58ef2f4d09b95a7e361846aa10"
+  },
+  {
     "file": "images/Login@2x.png",
     "hash": "cbfc75c2c17b3778cde30effa343949f"
   },
@@ -140,8 +156,36 @@
     "hash": "2b578536543d1fe9c83e9efa7d590586"
   },
   {
+    "file": "images/sp1@2x.png",
+    "hash": "2ae05d7cf6493d4571744ebefb3f1d2f"
+  },
+  {
+    "file": "images/sp2@2x.png",
+    "hash": "0105bb9d694ea7ba84df76183b46ad5d"
+  },
+  {
+    "file": "images/sp3@2x.png",
+    "hash": "b3676c0bf26e7bb6811e82cb47074e1c"
+  },
+  {
+    "file": "images/sp4@2x.png",
+    "hash": "d9bd43db47e9623ed9ae5fcb8725009b"
+  },
+  {
+    "file": "images/sp5@2x.png",
+    "hash": "b448e8201c4ceee43c479ab34e7d789a"
+  },
+  {
     "file": "images/title@2x.png",
     "hash": "d9b712c8c3c3752618c107490646cf61"
+  },
+  {
+    "file": "images/wechatPay@2x.png",
+    "hash": "6aef3609c6db78a1aba6d9f0ff75081a"
+  },
+  {
+    "file": "images/wrong@2x.png",
+    "hash": "675f14b73079d5fdacdadd02cfa41481"
   },
   {
     "file": "index.html",
@@ -261,7 +305,7 @@
   },
   {
     "file": "script.min.js",
-    "hash": "9ead8a67e862dd0ec72c4db7ec5b6728"
+    "hash": "8db8e6a671a0ae136387501920193117"
   },
   {
     "file": "sprite.min.js",
@@ -269,6 +313,6 @@
   },
   {
     "file": "style.css",
-    "hash": "ec022732c714c86481913e8d6add7f80"
+    "hash": "a833f5a8c513db79cf98a6f29df8cdbd"
   }
 ]

@@ -231,9 +231,9 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-wechat.Wechat",
-    "file": "plugins/cordova-plugin-wechat/www/wechat.js",
-    "pluginId": "cordova-plugin-wechat",
+    "id": "cordova-plugin-wechatv2.Wechat",
+    "file": "plugins/cordova-plugin-wechatv2/www/wechat.js",
+    "pluginId": "cordova-plugin-wechatv2",
     "clobbers": [
       "Wechat"
     ]
@@ -246,8 +246,8 @@ module.exports.metadata =
   "cordova-plugin-camera": "4.0.3",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-network-information": "2.0.1",
-  "cordova-plugin-wechat": "2.1.0",
-  "cordova-plugin-whitelist": "1.3.3"
+  "cordova-plugin-whitelist": "1.3.3",
+  "cordova-plugin-wechatv2": "2.1.3"
 };
 // BOTTOM OF METADATA
 });

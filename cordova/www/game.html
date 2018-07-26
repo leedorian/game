@@ -15,7 +15,7 @@
 <body>
   <div id="opt_main">
     <div id="main">
-      <div id="toolbar">
+      <div id="toolbar" class="GgameTools">
           <div id="life" class="life5 tb_item">
             <div class="apple">
               <div></div>
@@ -30,7 +30,7 @@
 
           <div id="coins">
               <img class="goldcoin" src="./images/iconGold.png" width="20">
-              <img class="add" src="./images/iconAdd.png" width="20">
+              <img class="add buyCoins" src="./images/iconAdd.png" width="20">
               <span class="count">0</span>
           </div>
 
@@ -44,7 +44,7 @@
           <button class="loginwechat loginByWechatButton" type="button" name="button">微信登录</button>
         </div>
       </div>
-      <div class="funcIcons GstartScreen">
+      <div class="funcIcons GstartScreen GgameTools">
         <img id="buttonNews" src="./images/iconNews.png" />
         <img id="buttonOption" src="./images/iconOption.png" />
         <img id="buttonRank" src="./images/iconRank.png" />
@@ -162,16 +162,15 @@
         <div class="magicButton"><img width="30%" src="./images/FontSlow@2x.png" /></div>
         <button class="button01 priceButton"><span class="count"></span></button>
       </div>
-      <div class="popup" id="topup">
+      <div class="popup propPop" id="topup">
         <div class="close"></div>
         <img class="cover" src="./images/buylife.png" width="100%" />
-        <div class="desc">没有体力了</div>
+        <div class="desc">没有体力了，距离恢复还有</div>
 
-        <div class="magicButton">
-          恢复体力
-        </div>
+        <div class="magicButton"><img width="30%" src="./images/FontTili@2x.png" /></div>
         <button class="button01 priceButton"><span class="count"></span></button>
       </div>
+
       <!-- <div class="popup" id="resurgence">
         <i class="fa fa-times fa-lg close" onclick="hidePopup('resurgence')"></i>
         <img class="cover" src="./images/revive.png" width="100%" />
@@ -227,7 +226,28 @@
           <a id="gagain" onclick='hideShare()'>再来</a>
         </div>
       </div> -->
-
+      <!-- coins -->
+      <div class="popup coinsPopup" id="coinsPopup">
+        <div class="close"></div>
+        <div class="inner">
+          <h1><img height="35" src="./images/FontBuy@2x.png" /></h1>
+          <ul>
+            <!-- <li>
+              <div class="ico"></div>
+              <div class="button01">$30</div>
+              <div class="number">999999</div>
+            </li> -->
+          </ul>
+          <div class="payBy">
+            <div class="wechat"><label><input checked type="radio"><img valign="middle" width="30" src="./images/wechatPay@2x.png" />微信支付</label></div>
+          </div>
+        </div>
+      </div>
+      <div id="alert" class="alerts success">
+        <div class="close"></div>
+        <h3>xxxxxxxx</h3>
+        <div class="msg">xxxx xxx x x x x x x </div>
+      </div>
       <div id="popupOverlay"></div>
     </div>
 
