@@ -286,8 +286,7 @@ button{
   max-height: 400px;
 }
 
-.popup .close,
-#alert .close{
+.popup .close{
   position: absolute;
   right: -20px;
   top: -20px;
@@ -348,22 +347,22 @@ button{
   background-repeat: no-repeat;
   background-size: contain;
 }
-.loginPopup .vercode{
+.phoneForm .vercode{
   position: relative;
 }
-.loginPopup .vercode .button01{
+.phoneForm .vercode .button01{
   position: absolute;
   right: 10px;
   top:10px;
 }
-.loginPopup .vercode .timing{
+.phoneForm .vercode .timing{
   position: absolute;
   right: 10px;
   top:15px;
   color: #fff;
   display: none;
 }
-.loginPopup .submit{
+.phoneForm .submit{
   margin:30px auto;
 }
 .loginButtonPopup .buttons{
@@ -383,7 +382,8 @@ button{
 }
 .settingPopup .avatar,
 .settingPopup .nickname,
-.settingPopup .wechat{
+.settingPopup .wechat,
+.settingPopup .phone{
   background: #FBD39F;
   border-radius: 5px;
   padding:5px;
@@ -394,10 +394,12 @@ button{
   margin-bottom: 10px;
 }
 
-.settingPopup .nickname .input01{
+.settingPopup .nickname .input01,
+.settingPopup .phone .input01{
   flex-basis: 160px;
   margin:0;
   border-bottom: 1px solid brown;
+  border-radius: 0;
 }
 .settingPopup .avatar .avatarImage{
   width: 50px;
@@ -411,6 +413,13 @@ button{
 }
 .settingPopup .logout .button01{
   margin: 0 auto;
+}
+.settingPopup .form01{
+  margin:0;
+  width: 100%;
+}
+.settingPopup .form01 .submit{
+  margin: 10px auto;
 }
 #popupOverlay{
   position: absolute;
@@ -836,12 +845,12 @@ button{
   .form01{
     margin: 10px;
   }
-  .loginPopup .vercode .timing{
+  .phoneForm .vercode .timing{
     right: 5px;
     top:5px;
     font-size: 12px;
   }
-  .loginPopup .vercode .button01{
+  .phoneForm .vercode .button01{
     font-size: 10px;
     width: 60px;
     height:20px;

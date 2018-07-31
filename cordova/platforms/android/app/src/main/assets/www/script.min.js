@@ -102,13 +102,7 @@
   window.webkitAudioContext;
   var context;
   var oPinao;
-  if (AudioContext) {
-    context = new AudioContext();
-    oPinao = new Piano(context);
-  }else {
-    // start(1);
-    dfdSound.resolve();
-  }
+
 
   function randomPlay() {
     if (oPinao) {
@@ -152,7 +146,7 @@
 
   /*game*/
   var updateInterval = false;
-  var serviceRoot = "http://game.weiplus5.com/";
+  var serviceRoot = "https://game.weiplus5.com/";
   window.requestAnimationFrame = function() {
       return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
           window.setTimeout(callback, 1E3 / 60)
@@ -165,55 +159,6 @@
   //initial
   var props;
   var iniLoad = true;
-  function fnGetPropList(){
-    return $.ajax({
-      dataType: "json",
-      url: serviceRoot + "index.php?m=game&f=index&v=getPropList",
-      xhrFields: { withCredentials: true },
-      success: function (data) {
-        var status = parseInt(data.status, 10);
-        if ( status === -238) {
-
-          $(".loginByPhoneButton,.loginByWechatButton").show();
-          $(".GgameTools").hide();
-          $("#startGameButton").hide();
-        }else if (status >= 0 ) {
-          props = data.rows;
-          $("#magicpopup .count").html(data.rows.speed0[0].price);
-          $(".revivePrice").html(data.rows.revive0[0].price);
-          $("#coins .count").html(parseInt(data.money,10));
-          $("#nickName").val(data.nick);
-          $("#avatarImage").attr("src", data.photo);
-
-          $(".loginByPhoneButton,.loginByWechatButton").hide();
-          $("#startGameButton").show();
-        }else {
-          alert(data.reason);
-        }
-      }
-    });
-  };
-  fnGetPropList();
-
-  function fnGetLive(){
-    return $.ajax({
-      dataType: "json",
-      url: serviceRoot + "index.php?m=game&v=getActionPoint",
-      xhrFields: { withCredentials: true },
-      success: function (data) {
-        var status = parseInt(data.status, 10);
-        if ( status === -238) {
-          // showPopup("loginButtonPopup");
-        }else if (status >= 0 ) {
-          life = parseInt(data.data, 10);
-          updateLife();
-        }else {
-          alert(data.reason);
-        }
-      }
-    });
-  }
-  fnGetLive();
   var gameModes = {
       CLASSIC: 0,
       ARCADE: 1,
@@ -246,9 +191,10 @@
   var greenTileY = 0;
   var nowSheet;
   var nowPianoKey = 0;
-  var life = 0, reviveCount = 0;
+  var life = 0, reviveCount = 0, intLifeCountDown = 0, nLifeCountDown;
   var iX;
-  var iOpenedOverlay = 0;
+  // var iOpenedOverlay = 0;
+  var aPopupStack=[];
   var bReviving = false;
 
   // var showletters = localStorage["showletters"] == "false" ? false : true;
@@ -259,6 +205,67 @@
   var nCanvasHeight = 600;
   var nTileWidth = 100;
   var nTileHeight = 150;
+
+
+
+  function fnGetPropList(){
+    return $.ajax({
+      dataType: "json",
+      url: serviceRoot + "index.php?m=game&f=index&v=getPropList",
+      xhrFields: { withCredentials: true },
+      success: function (data) {
+        var status = parseInt(data.status, 10);
+        if ( status === -238) {
+
+          $(".loginByPhoneButton,.loginByWechatButton").show();
+          $(".GgameTools").hide();
+          $("#startGameButton").hide();
+        }else if (status >= 0 ) {
+          props = data.rows;
+          $("#magicpopup .count").html(data.rows.speed0[0].price);
+          $(".revivePrice").html(data.rows.revive0[0].price);
+          $("#coins .count").html(parseInt(data.money,10));
+          $("#topup .count").html(data.rows.strength0[0].price);
+          $("#nickName").val(data.nick);
+          $("#avatarImage").attr("src", data.photo);
+
+          if (data.isbindwx) {
+            $("#settingPopup .wechat").hide();
+          }else {
+            $("#settingPopup .wechat").show();
+          }
+
+          $(".loginByPhoneButton,.loginByWechatButton").hide();
+          $("#startGameButton").show();
+        }else {
+          alert(data.reason);
+        }
+      }
+    });
+  };
+  fnGetPropList();
+
+  function fnGetLive(){
+    return $.ajax({
+      dataType: "json",
+      url: serviceRoot + "index.php?m=game&v=getActionPoint",
+      xhrFields: { withCredentials: true },
+      success: function (data) {
+        var status = parseInt(data.status, 10);
+        if ( status === -238) {
+          // showLogin();
+        }else if (status >= 0 ) {
+          life = parseInt(data.data, 10);
+          intLifeCountDown = parseInt(data.oversec, 10);
+          updateLife();
+        }else {
+          alert(data.reason);
+        }
+      }
+    });
+  }
+  fnGetLive();
+
   function start(mode, bRevive) {
       bReviving = bRevive;
       resizeGame();
@@ -379,13 +386,12 @@ function update() {
                   success: function (data) {
                     var status = parseInt(data.status, 10);
                     if ( status === -238) {
-                      showPopup("loginButtonPopup");
+                      showLogin();
                     }else if (status >= 0 ) {
-                      life--;
-                      updateLife();
+                      fnGetLive();
                     }else if( status === -227){
                       //no life
-                      alert("todo no life");
+                      showPopup("topup");
                     }else {
                       alert(data.reason);
                     }
@@ -394,7 +400,7 @@ function update() {
               }
 
               isStart = true;
-              hideHelp();
+              // hideHelp();
               $("#toolbar").hide();
               clickedEver++;
               clickedTiles.push(tilesArray[tilesArray.length - 1]);
@@ -411,7 +417,7 @@ function update() {
               pianoPlay(nowSheet[nowPianoKey]);
               nowPianoKey++
           } else if (isStart && keyIndex != -1) {
-              hideHelp();
+              // hideHelp();
               speedY = 0;
               errorTile = [keyIndex, tilesArray[tilesArray.length - 1][1], 0, 0];
               keyListener = false;
@@ -450,12 +456,27 @@ function update() {
     var nApple = life;
     var nAddLife = 0;
     $("#life .apple > div").removeClass("filled");
-    if (life > 5) {
+    if (nLifeCountDown) {
+      clearInterval(nLifeCountDown);
+    }
+    if (life >= 5) {
       nApple = 5;
       nAddLife = life - 5;
+      $("#life .count").html(nAddLife == 0 ? "00:00" : nAddLife);
+    }else {
+      nLifeCountDown = window.setInterval(function () {
+        intLifeCountDown--;
+        if (intLifeCountDown < 0) {
+          clearInterval(nLifeCountDown);
+          fnGetLive();
+        }else {
+          nAddLife = new Date(intLifeCountDown * 1000).toISOString().substr(14, 5);
+          $("#life .count").html(nAddLife);
+        }
+      }, 1000);
     }
     $("#life .apple > div:nth-child(-n+" + nApple + ")").addClass("filled");
-    $("#life .count").html();
+
   }
   function drawTile() {
       for (var i = 0; i < tilesArray.length; i++) {
@@ -656,9 +677,9 @@ function update() {
       randomPlay()
   }
 
-  function hideHelp() {
-      hidePopup("help");
-  }
+  // function hideHelp() {
+  //     hidePopup("help");
+  // }
 
   // function showHelp(mode) {
   //     if (mode == 0) {
@@ -702,7 +723,10 @@ function update() {
       pianoPlay("A", 1);
       stopGame();
   }
-
+  function showLogin() {
+    showPopup("loginButtonPopup");
+    $("#loginButtonPopup .loginByPhoneButton,#loginButtonPopup .loginByWechatButton").show();
+  }
   function showPopup(id) {
       var oSize = newSize();
       var $oPopup = $("#" + id);
@@ -726,7 +750,11 @@ function update() {
             left: iLeft
           });
         }, 300);
-        iOpenedOverlay++;
+
+        aPopupStack.forEach(function (stacked) {
+          stacked.hide();
+        });
+        aPopupStack.push($oPopup);
       }
       // var popup = document.getElementById(id);
       // var popupOverlay = document.getElementById("popupOverlay");
@@ -746,14 +774,19 @@ function update() {
   }
 
   function hidePopup(id) {
-    if ($("#" + id).is(":visible")) {
-      iOpenedOverlay--;
+    var $popUp = $("#" + id);
+    if ($popUp.is(":visible")) {
+      aPopupStack.pop();
+
+      // iOpenedOverlay--;
       document.getElementById(id).classList.remove("show");
       setTimeout(function () {
         document.getElementById(id).style.display="none";
-        if (iOpenedOverlay === 0) {
+        if (aPopupStack.length === 0) {
           var popupOverlay = document.getElementById("popupOverlay");
           popupOverlay.style.display = "none";
+        }else {
+          aPopupStack[aPopupStack.length - 1].show();
         }
       }, 300);
     }
@@ -791,8 +824,10 @@ function update() {
   }
   function newSize() {
     // var widthToHeight = 2 / 3;
-    var newWidth = window.innerWidth;
-    var newHeight = window.innerHeight;
+    // var newWidth = window.innerWidth;
+    // var newHeight = window.innerHeight;
+    var newWidth = window.screen.width;
+    var newHeight = window.screen.height;
     // var newWidthToHeight = newWidth / newHeight;
     //
     // if (newWidthToHeight > widthToHeight) {
@@ -910,7 +945,7 @@ function update() {
           var status = parseInt(data.status, 10);
           if ( status === -238) {
             hidePopup("magicpopup");
-            showPopup("loginButtonPopup");
+            showLogin();
             isPause = false;
           }else if (status >= 0 ) {
             speedY = normalSpeed;
@@ -975,7 +1010,7 @@ function update() {
         var status = parseInt(data.status, 10);
 
         if ( status === -238) {
-          showPopup("loginButtonPopup");
+          showLogin();
         }else if (status >= 0 ) {
           $("#coins .count").html(parseInt(data.money,10));
           reviveCount = parseInt(data.reviveCount, 10);
@@ -995,7 +1030,7 @@ function update() {
     fnGetPropList().done(function (data) {
       var status = parseInt(data.status, 10);
       if ( status === -238) {
-        showPopup("loginButtonPopup");
+        showLogin();
       }else if (status >= 0 ) {
         fnGetLive().done(function () {
           if (life <= 0) {
@@ -1014,10 +1049,12 @@ function update() {
 
 
 
-  $("#buttonGetVer").click(function (e) {
-    var $oPhone = $("#login_phone");
+  $(".buttonGetVer").click(function (e) {
+    var $btn = $(e.target);
+    var $parent = $btn.parents(".phoneForm");
+    var $oPhone = $parent.find(".login_phone");
     var sPhone = $oPhone.val();
-    var $oTiming = $("#loginPopup .timing");
+    var $oTiming = $parent.find(".timing");
     var nCountDown, nTiming = 30;
     var $oButtonGetVer = $(e.target);
     if ($oPhone[0].validity.valid) {
@@ -1041,8 +1078,14 @@ function update() {
           mobile: sPhone,
           type: 3
         },
-        success: function () {
-
+        success: function (data) {
+          if (data.status < 0) {
+            showAlert({
+              msg: data.reason,
+              title: "发送失败",
+              type: 'warning'
+            });
+          }
         },
         dataType: 'json'
       });
@@ -1053,10 +1096,12 @@ function update() {
 
   });
 
-  $("#loginPopup form").submit(function (e) {
+  $(".phoneForm").submit(function (e) {
     e.preventDefault();
-    var $oVer = $("#login_ver");
-    var $oPhone = $("#login_phone");
+    var $form = $(e.target);
+    var bIsbindingPhone = $form.hasClass("bindPhone");
+    var $oVer = $form.find(".login_ver");
+    var $oPhone = $form.find(".login_phone");
     var sPhone = $oPhone.val();
     var sVer = $oVer.val();
       if ($oPhone[0].validity.valid && $oVer[0].validity.valid) {
@@ -1067,13 +1112,22 @@ function update() {
             username: sPhone,
             smscode: sVer
           },
-          success: function () {
-            hidePopup("loginPopup");
-            fnGetPropList();
-            fnGetLive();
-            if ($(".fakeBG").is(":visible")) {
-              $('.GgameTools').show();
+          success: function (data) {
+            if (data.status >= 0) {
+              hidePopup("loginPopup");
+              fnGetPropList();
+              fnGetLive();
+              if ($(".fakeBG").is(":visible")) {
+                $('.GgameTools').show();
+              }
+            }else {
+              showAlert({
+                msg: data.reason,
+                title: "登录失败",
+                type: 'warning'
+              });
             }
+
           },
           dataType: 'json'
         });
@@ -1091,7 +1145,7 @@ function update() {
         var $oMessageList = $("#messagesPopup ul");
         $oMessageList.html("");
         if ( status === -238) {
-          showPopup("loginButtonPopup");
+          showLogin();
         }else if (status >= 0 ) {
 
           for (var i = 0; i < data.rows.length; i++) {
@@ -1131,27 +1185,43 @@ function update() {
     fnGetPropList().done(function (data) {
       var status = parseInt(data.status, 10);
       if ( status === -238) {
-        showPopup("loginButtonPopup");
+        showLogin();
       }else if (status >= 0 ) {
         showPopup("settingPopup");
       }
     });
 
   });
+  /*
+  buy life
+   */
   $("#topup .priceButton").click(function () {
     $.ajax({
-      type: "GET",
-      url: serviceRoot + "index.php?m=message&f=message&v=getMsglist",
+      dataType: "json",
+      type: "POST",
+      data: {
+        propid: props.strength0[0].id,
+      },
+      url: serviceRoot + "index.php?m=game&v=buyGameProp",
+      xhrFields: { withCredentials: true },
       success: function (data) {
         var status = parseInt(data.status, 10);
         if ( status === -238) {
-          showPopup("loginButtonPopup");
+          hidePopup("topup");
+          showLogin();
         }else if (status >= 0 ) {
-            fnGetLive();
+          $("#coins .count").html(parseInt(data.money,10));
+          hidePopup("topup");
+          showAlert({
+            msg: "您的体力恢复啦，继续挑战吧！",
+            title: "恢复体力",
+            type: 'success'
+          });
+        }else if (status === -205) {
+            //not enough coins
+            showCoinsPopup();
         }
-
-      },
-      dataType: 'json'
+      }
     });
   });
   $("#saveNickName").click(function () {
@@ -1166,7 +1236,7 @@ function update() {
         success: function (data) {
           var status = parseInt(data.status, 10);
           if ( status === -238) {
-            showPopup("loginButtonPopup");
+            showLogin();
           }else if (status >= 0 ) {
              alert("昵称修改成功");
           }
@@ -1201,7 +1271,7 @@ function update() {
         destinationType: Camera.DestinationType.FILE_URI
     });
   });
-  $(".loginByWechatButton,.bindWechat").click(function () {
+  $(".loginByWechatButton,.bindWechat").click(function (e) {
     // Wechat.share({
     //     text: "This is just a plain string",
     //     scene: Wechat.Scene.TIMELINE   // share to Timeline
@@ -1210,6 +1280,8 @@ function update() {
     // }, function (reason) {
     //     alert("Failed: " + reason);
     // });
+    var $tar = $(e.target);
+    var sType = $tar.hasClass("bindWechat") ? "bind_auth" : "auth";
     var scope = "snsapi_userinfo",
     state = "_" + (+new Date());
     Wechat.auth(scope, state, function (response) {
@@ -1217,7 +1289,7 @@ function update() {
         if (response.code) {
             $.ajax({
               type: "GET",
-              url: serviceRoot + "index.php?m=member&f=index&v=auth&type=weixin&code=" + response.code,
+              url: serviceRoot + "index.php?m=member&f=index&v=" + sType + "&type=weixin&code=" + response.code,
               success: function (data) {
                 var status = parseInt(data.status, 10);
                 if (status >= 0 ) {
@@ -1228,7 +1300,7 @@ function update() {
                      $('.GgameTools').show();
                    }
                 }else {
-                  alert(data.reason);
+                  //alert(data.reason);
                 }
               },
               dataType: 'json'
@@ -1273,12 +1345,12 @@ function update() {
                     fnGetPropList();
                     hidePopup("coinsPopup");
                     showAlert({
-                      msg: "购买成功",
-                      title: "您已成功购买" + sNum + "个金币",
+                      msg: "您已成功购买" + sNum + "个金币",
+                      title: "购买金币",
                       type: 'success'
                     });
                   }else if ( data.status == -238) {
-                    showPopup("loginButtonPopup");
+                    showLogin();
                   }
 
                 },
@@ -1287,12 +1359,12 @@ function update() {
           }, function (reason) {
               showAlert({
                 msg: reason,
-                title: "支付失败",
+                title: "购买金币",
                 type: 'warning'
               });
           });
         }else if ( data.status == -238) {
-          showPopup("loginButtonPopup");
+          showLogin();
         }
 
       },
@@ -1316,7 +1388,7 @@ function update() {
            }
            showPopup("coinsPopup");
         }else if ( data.status == -238) {
-          showPopup("loginButtonPopup");
+          showLogin();
         }
       },
       dataType: 'json'
@@ -1344,9 +1416,9 @@ function update() {
     $alert.show();
     window.setTimeout(function () {
       $alert.hide();
-    }, 5000);
+    }, 3000);
   }
-  $("#alert .close").click(function (e) {
+  $("#alert").click(function (e) {
     $("#alert").hide();
   });
   // Change image source
@@ -1388,15 +1460,15 @@ function update() {
                 }).done(function(data) {
                   if (parseInt(data.status, 10) >= 0) {
                     showAlert({
-                      msg: "设置-头像",
-                      title: '头像保存成功',
+                      msg: '头像保存成功',
+                      title: "设置-头像",
                       type: 'success'
                     });
                     $tar.off("click.avatar");
                   }else {
                     showAlert({
-                      msg: "设置-头像",
-                      title: '头像保存失败:' + data.reason,
+                      msg: '头像保存失败:' + data.reason,
+                      title: "设置-头像",
                       type: 'error'
                     });
                   }
@@ -1457,7 +1529,7 @@ function update() {
   }
 
   function onFail(message) {
-      alert('Failed because: ' + message);
+      //alert('Failed because: ' + message);
   }
   function fnGetRankList(list) {
     var sListName;
@@ -1482,7 +1554,7 @@ function update() {
         var status = parseInt(data.status, 10);
 
         if ( status === -238) {
-          showPopup("loginButtonPopup");
+          showLogin();
         }else if (status >= 0 ) {
           for (var i = 0; i < data.rows.length; i++) {
             $rankList.append(['<li><div class="ranking">',i > 2 ? i+1 : "",'</div><img src="',data.rows[i].photo,'" class="avatar" /><div class="username">',data.rows[i].nick,'</div><div class="rank_score">',data.rows[i].rscore,'</div></li>'].join(""));
@@ -1503,6 +1575,12 @@ function update() {
   document.addEventListener("deviceready", onDeviceReady, false);
 
   function onDeviceReady() {
-    // alert("hot7");
+    if (AudioContext) {
+      context = new AudioContext();
+      oPinao = new Piano(context);
+    }else {
+      // start(1);
+      dfdSound.resolve();
+    }
   }
 })();

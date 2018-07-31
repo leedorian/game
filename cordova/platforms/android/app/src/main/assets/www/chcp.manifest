@@ -1,15 +1,19 @@
 [
   {
     "file": "app.min.js",
-    "hash": "d9d0981eb9752f55e29a8a30c43fa349"
+    "hash": "b6b92154f4eb4eef25df7373f5ebb759"
   },
   {
     "file": "cordova_redirect.html",
-    "hash": "70b038c12fd8113f32fb3426857d5601"
+    "hash": "5eeb6201289c849b20bb74cb73d1b5b1"
+  },
+  {
+    "file": "easeljs-0.8.2.min.js",
+    "hash": "937c3ec68021211c056f61c9ceaccffd"
   },
   {
     "file": "game.html",
-    "hash": "f680398be74522d575a2f0ce0753d517"
+    "hash": "ab9a987fa964e9cfde3bd0cda915c416"
   },
   {
     "file": "images/bg.png",
@@ -305,7 +309,7 @@
   },
   {
     "file": "script.min.js",
-    "hash": "8db8e6a671a0ae136387501920193117"
+    "hash": "ee282fd2bea48442d6cc073c14da3463"
   },
   {
     "file": "sprite.min.js",
@@ -313,6 +317,6 @@
   },
   {
     "file": "style.css",
-    "hash": "a833f5a8c513db79cf98a6f29df8cdbd"
+    "hash": "a1646d7b7ead11ca8697b4fe729ab1bd"
   }
 ]

@@ -22,6 +22,10 @@
     <feature name="Wechat">
         <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
     <name>别碰白块</name>
     <description>
     </description>
@@ -48,10 +52,17 @@
     <icon density="xhdpi" src="res/android/icon96.png" />
     <icon density="xxhdpi" src="res/android/icon144.png" />
     <icon density="xxxhdpi" src="res/android/icon192.png" />
+    <splash density="port-hdpi" src="res/android/splash/bugani0044.png" />
+    <splash density="port-ldpi" src="res/android/splash/bugani0044.png" />
+    <splash density="port-mdpi" src="res/android/splash/bugani0044.png" />
+    <splash density="port-xhdpi" src="res/android/splash/bugani0044.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="loadUrlTimeoutValue" value="60000" />
     <preference name="WECHATAPPID" value="wxde833bddadcdeb1d" />
     <preference name="Fullscreen" value="true" />
     <preference name="orientation" value="portrait" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
 </widget>

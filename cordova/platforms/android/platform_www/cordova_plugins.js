@@ -237,6 +237,14 @@ module.exports = [
     "clobbers": [
       "Wechat"
     ]
+  },
+  {
+    "id": "cordova-plugin-splashscreen.SplashScreen",
+    "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+    "pluginId": "cordova-plugin-splashscreen",
+    "clobbers": [
+      "navigator.splashscreen"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -247,7 +255,8 @@ module.exports.metadata =
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-network-information": "2.0.1",
   "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-wechatv2": "2.1.3"
+  "cordova-plugin-wechatv2": "2.1.3",
+  "cordova-plugin-splashscreen": "5.0.2"
 };
 // BOTTOM OF METADATA
 });

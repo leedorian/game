@@ -25,13 +25,13 @@
               <div></div>
             </div>
             <img class="add" src="./images/iconAdd.png" width="20">
-            <span class="count">0</span>
+            <span class="count"></span>
           </div>
 
           <div id="coins">
               <img class="goldcoin" src="./images/iconGold.png" width="20">
               <img class="add buyCoins" src="./images/iconAdd.png" width="20">
-              <span class="count">0</span>
+              <span class="count"></span>
           </div>
 
       </div>
@@ -95,11 +95,11 @@
       <div class="popup loginPopup" id="loginPopup">
         <div class="close"></div>
         <h1><img height="35" src="./images/FontMobileLogin@2x.png" /></h1>
-        <form novalidate class="form01">
-          <input id="login_phone" required="required" pattern="^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$" class="input01" type="text" value="" placeholder="输入手机号" />
+        <form novalidate class="form01 phoneForm">
+          <input id="login_phone" required="required" pattern="^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$" class="input01 login_phone" type="text" value="" placeholder="输入手机号" />
           <div class="vercode">
-            <input id="login_ver" required="required" class="input01" type="text" value="" placeholder="输入验证码" />
-            <button id="buttonGetVer" class="button01" type="button" name="button">获取验证码</button>
+            <input id="login_ver" required="required" class="input01 login_ver" type="text" value="" placeholder="输入验证码" />
+            <button id="buttonGetVer" class="button01 buttonGetVer" type="button" name="button">获取验证码</button>
             <div class="timing">30秒...</div>
           </div>
           <button id="buttonLogin" type="submit" class="button01 submit" name="button">登录</button>
@@ -138,7 +138,7 @@
         <div class="settingCon">
           <div class="avatar">
             <img id="avatarImage" src="./images/headMoren.png" class="avatarImage" />
-            <button id="buttonUploadAvatar" class="button01" type="button" name="button">上传头像</button>
+            <button id="buttonUploadAvatar" class="button01" type="button" name="button">选择</button>
             <button id="buttonSaveAvatar" class="button01" type="button" name="button">保存</button>
           </div>
           <div class="nickname">
@@ -148,6 +148,17 @@
           <div class="wechat">
             <span></span>
             <button class="button01 bindWechat" type="button" name="button">绑定微信</button>
+          </div>
+          <div class="phone">
+            <form novalidate class="form01 phoneForm bindPhone">
+              <input required="required" pattern="^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$" class="input01 login_phone" type="text" value="" placeholder="输入手机号" />
+              <div class="vercode">
+                <input required="required" class="input01 login_ver" type="text" value="" placeholder="输入验证码" />
+                <button class="button01 buttonGetVer" type="button" name="button">获取验证码</button>
+                <div class="timing">30秒...</div>
+              </div>
+              <button type="submit" class="button01 submit" name="button">绑定手机</button>
+            </form>
           </div>
           <div class="logout">
             <button id="logout" class="button01" type="button" name="button">退出登录</button>
@@ -244,9 +255,8 @@
         </div>
       </div>
       <div id="alert" class="alerts success">
-        <div class="close"></div>
-        <h3>xxxxxxxx</h3>
-        <div class="msg">xxxx xxx x x x x x x </div>
+        <h3></h3>
+        <div class="msg"></div>
       </div>
       <div id="popupOverlay"></div>
     </div>

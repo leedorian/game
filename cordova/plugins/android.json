@@ -25,6 +25,9 @@
     "cordova-plugin-wechatv2": {
       "WECHATAPPID": "wxde833bddadcdeb1d",
       "PACKAGE_NAME": "cn.joycells"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "cn.joycells"
     }
   },
   "dependent_plugins": {}

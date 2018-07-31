@@ -24,6 +24,10 @@
         <icon density="xhdpi" src="res/android/icon96.png" />
         <icon density="xxhdpi" src="res/android/icon144.png" />
         <icon density="xxxhdpi" src="res/android/icon192.png" />
+        <splash density="port-hdpi" src="res/android/splash/bugani0044.png" />
+        <splash density="port-ldpi" src="res/android/splash/bugani0044.png" />
+        <splash density="port-mdpi" src="res/android/splash/bugani0044.png" />
+        <splash density="port-xhdpi" src="res/android/splash/bugani0044.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -43,5 +47,9 @@
     <plugin name="cordova-plugin-wechatv2" spec="^2.1.3">
         <variable name="WECHATAPPID" value="wxde833bddadcdeb1d" />
     </plugin>
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <engine name="android" spec="^7.0.0" />
 </widget>
