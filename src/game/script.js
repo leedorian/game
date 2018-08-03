@@ -3,6 +3,7 @@
   var dfdSound = $.Deferred();
   dfdSound.done(function(){
     start(1);
+
   });
 
   /*sounds*/
@@ -78,7 +79,6 @@
 
       function onChordLoaded(buffers) {
           ctx.chordBuffers = buffers;
-          // start(1);
           dfdSound.resolve();
       };
 
@@ -312,8 +312,8 @@
       canvas.addEventListener("touchstart", mouseListener,
           false);
       requestAnimationFrame(update);
-      document.getElementById("gameoverBlock").style.display = "none";
-      // document.getElementById("gameoverBlockwin").style.display = "none";
+      // document.getElementById("revivePopup").style.display = "none";
+      // document.getElementById("revivePopupwin").style.display = "none";
       // showHelp(mode);
   }
 function update() {
@@ -343,6 +343,7 @@ function update() {
       }
       drawBorders();
       drawTile();
+      console.log(speedY);
       if (clickedEver == 0) {
           context.fillStyle = "rgb(255,255,255)";
           context.fillText("开始", tilesArray[tilesArray.length - 1][0] * nTileWidth + nTileWidth/2, nTileHeight * 2.7)
@@ -372,6 +373,7 @@ function update() {
       else context.fillStyle = "rgb(251,62,56)";
       context.fillText(nowScore, nCanvasWidth/2, 80);
       clickedNew = false;
+      console.log(updateInterval);
       if (updateInterval) requestAnimationFrame(update)
   }
   keyboardListener = function(e) {
@@ -414,8 +416,9 @@ function update() {
                       pianoSheets[parseInt(Math.random() * 19)];
                   nowPianoKey = 0
               }
+              navigator.vibrate(50);
               pianoPlay(nowSheet[nowPianoKey]);
-              nowPianoKey++
+              nowPianoKey++;
           } else if (isStart && keyIndex != -1) {
               // hideHelp();
               speedY = 0;
@@ -560,18 +563,21 @@ function update() {
       // if (life === 0) {
       //   $("#again").hide();
       //   $("#buyLife").show();
-      //   $("#gameoverBlock .magicButton").hide();
+      //   $("#revivePopup .magicButton").hide();
       // }else {
       //   $("#again").show();
       //   $("#buyLife").hide();
-      //   $("#gameoverBlock .magicButton").show();
+      //   $("#revivePopup .magicButton").show();
       // }
-      // if (reviveCount == 3) {
-      //   $("#gameoverBlock .magicButton").hide();
-      // }
+      if (reviveCount < 3) {
+        showPopup("revivePopup");
+      }else {
+        againHandler(null, false);
+      }
 
       $("#toolbar").show();
-      showPopup("gameoverBlock");
+
+      navigator.vibrate([100, 100, 100]);
 
   }
 
@@ -594,7 +600,7 @@ function update() {
               break;
           case gameModes.RUSH:
               nowScore = "0.000/s";
-              speedY = normalSpeed;
+              speedY = 0;
               break;
           case gameModes.RELAY:
               nowScore = '10.000"';
@@ -676,45 +682,6 @@ function update() {
       localStorage["colorful"] = colorful;
       randomPlay()
   }
-
-  // function hideHelp() {
-  //     hidePopup("help");
-  // }
-
-  // function showHelp(mode) {
-  //     if (mode == 0) {
-  //         if (!localStorage["help_0"]) {
-  //             document.getElementById("helpDetails").innerHTML = "从最下面黑块开始，<br/>以最快速度达到30个黑块。";
-  //             showPopup("help");
-  //             localStorage["help_0"] = true
-  //         }
-  //     } else if (mode == 1) {
-  //         if (!localStorage["help_1"]) {
-  //             document.getElementById("helpDetails").innerHTML = "从最下面黑块开始，<br/>不要错过一个。";
-  //             showPopup("help");
-  //             localStorage["help_1"] = true
-  //         }
-  //     } else if (mode ==
-  //         2) {
-  //         if (!localStorage["help_2"]) {
-  //             document.getElementById("helpDetails").innerHTML = "30秒内尽可能多的点击黑块。";
-  //             showPopup("help");
-  //             localStorage["help_2"] = true
-  //         }
-  //     } else if (mode == 3) {
-  //         if (!localStorage["help_3"]) {
-  //             document.getElementById("helpDetails").innerHTML = "从最下面黑块开始，<br/>不要错过一个。";
-  //             showPopup("help");
-  //             localStorage["help_3"] = true
-  //         }
-  //     } else if (mode == 4)
-  //         if (!localStorage["help_4"]) {
-  //             document.getElementById("helpDetails").innerHTML =
-  //                 '从最下面黑块开始，<br/>在10秒内点击50个黑块，<br/>然后获得新的10秒...';
-  //             showPopup("help");
-  //             localStorage["help_4"] = true
-  //         }
-  // }
 
   function showEndGame() {
       updateInterval = false;
@@ -800,7 +767,6 @@ function update() {
   function showLoading() {
     var oSize = newSize();
     var $loading = $("#loadingAni");
-    var $loadingOverlay = $("#loadingOverlay");
     var iLeft = oSize.w / 2 - 24 + 'px' ;
     var iTop = oSize.h / 2 - 24  + 'px';
 
@@ -809,25 +775,18 @@ function update() {
       left:iLeft
     });
 
-    $loadingOverlay.css({
-      width: oSize.w + 'px',
-      height:oSize.h + 'px'
-    })
     $loading.show();
-    $loadingOverlay.show();
   }
   function hideLoading() {
     var $loading = $("#loadingAni");
-    var $loadingOverlay = $("#loadingOverlay");
     $loading.hide();
-    $loadingOverlay.hide();
   }
   function newSize() {
     // var widthToHeight = 2 / 3;
-    // var newWidth = window.innerWidth;
-    // var newHeight = window.innerHeight;
-    var newWidth = window.screen.width;
-    var newHeight = window.screen.height;
+    var newWidth = window.innerWidth;
+    var newHeight = window.innerHeight;
+    // var newWidth = window.screen.width;
+    // var newHeight = window.screen.height;
     // var newWidthToHeight = newWidth / newHeight;
     //
     // if (newWidthToHeight > widthToHeight) {
@@ -844,16 +803,17 @@ function update() {
       // var footer = document.querySelectorAll('.footer');
       // var score = document.querySelectorAll('.score');
       // var mode = document.querySelectorAll('.mode');
-      var help = document.querySelector('#help');
+      // var help = document.querySelector('#help');
       var popups = document.querySelectorAll('.popup');
       var oSize = newSize();
+      // alert("screenH:" + oSize.h +"\n" + "innerH:" + window.innerHeight);
       gameArea.style.height = oSize.h + 'px';
       gameArea.style.width = oSize.w + 'px';
 
       gameArea.style.marginTop = (-oSize.h / 2) + 'px';
       gameArea.style.marginLeft = (-oSize.w / 2) + 'px';
-      help.style.width = oSize.w + 'px';
-      help.style.height = oSize.h + 'px';
+      // help.style.width = oSize.w + 'px';
+      // help.style.height = oSize.h + 'px';
       var gameCanvas = document.getElementById('game');
       gameCanvas.width = oSize.w;
       gameCanvas.height = oSize.h;
@@ -884,26 +844,27 @@ function update() {
       //   mode[i].style.marginTop = nCanvasHeight * 0.1 + "px";
       // }
       gameArea.style.display = "inline-block";
-      $(".againLink,.againClose").off("click").on("click", againHandler);
+      $(".againClose").off("click").on("click", againHandler);
       // document.getElementById("again").removeEventListener("click", againHandler);
       // document.getElementById("gagain").removeEventListener("click", againHandler);
       // document.getElementById("again").addEventListener("click", againHandler);
       // document.getElementById("gagain").addEventListener("click", againHandler);
   }
   function againHandler(event, bRevive) {
-    hidePopup("gameoverBlock");
-    $("#gameoverBlock .magicButton").show();
+    hidePopup("revivePopup");
+    $("#revivePopup .magicButton").show();
 
     if (!bRevive){
       $(".GstartScreen").show();
       $(".revivePrice").html(props.revive0[0].price);
       bReviving = false;
       reviveCount = 0;
+      var scoreNum = parseInt(nowScore, 10);
       $.ajax({
         dataType: "json",
         type: "POST",
         data: {
-          score: parseInt(nowScore, 10),
+          score: scoreNum,
         },
         url: serviceRoot + "index.php?m=game&v=addGameScore",
         xhrFields: { withCredentials: true },
@@ -912,14 +873,18 @@ function update() {
           if ( status === -238) {
             showPopup("loginButtonPopup");
           }else if (status >= 0 ) {
-
+            $("#gameOverPopup .desc span").html(scoreNum);
+            showPopup("gameOverPopup");
           }else {
             alert(data.reason);
           }
         }
       });
     }
-    start(nowMode, bRevive);
+    // else{
+      start(nowMode, bRevive);
+    // }
+
   }
   function openOption() {
     var menu = document.getElementById('menu');
@@ -948,7 +913,7 @@ function update() {
             showLogin();
             isPause = false;
           }else if (status >= 0 ) {
-            speedY = normalSpeed;
+            speedY = 0;
             tempSpeedY = undefined;
             isPause = false;
             $("#coins .count").html(parseInt(data.money,10));
@@ -1014,19 +979,20 @@ function update() {
         }else if (status >= 0 ) {
           $("#coins .count").html(parseInt(data.money,10));
           reviveCount = parseInt(data.reviveCount, 10);
-          if (reviveCount < 3) {
-            $(".revivePrice").html(props["revive" + reviveCount][0].price);
-          }
-
           againHandler(null, true);
+          $(".revivePrice").html(props["revive" + reviveCount][0].price);
+
+
         }else if (status === -205) {
             //not enough coins
             showCoinsPopup();
         }
       }
     });
+
   }
-  $("#startGameButton").on("click", function () {
+  $("#startGameButton, #gameOverPopup .startGameButton").on("click", function (e) {
+    hidePopup("gameOverPopup");
     fnGetPropList().done(function (data) {
       var status = parseInt(data.status, 10);
       if ( status === -238) {
@@ -1136,6 +1102,33 @@ function update() {
       }
   });
 
+  $("#buttonShare").click(function () {
+     Wechat.share({
+        message: {
+        title: "下载欢乐白块",
+        description: "This is description.",
+        thumb: "www/images/wechatThumb.png",
+        media: {
+          type: Wechat.Type.WEBPAGE,
+          webpageUrl: "http://47.98.97.163:8011/game/app-release.apk"
+        }
+      },
+      scene: Wechat.Scene.TIMELINE   // share to Timeline
+      }, function () {
+          showAlert({
+            msg: "成功分享到朋友圈，可以和朋友一起玩啦！",
+            title: "分享",
+            type: 'success'
+          });
+      }, function (reason) {
+        showAlert({
+          msg: "分享被取消啦！",
+          title: "分享",
+          type: 'warning'
+        });
+      });
+
+  });
   $("#buttonNews").click(function () {
     $.ajax({
       type: "GET",
@@ -1147,10 +1140,14 @@ function update() {
         if ( status === -238) {
           showLogin();
         }else if (status >= 0 ) {
-
-          for (var i = 0; i < data.rows.length; i++) {
-            $oMessageList.append(["<li>",data.rows[i].addtime,data.rows[i].content,"</li>"].join(" "));
+          if (data.rows.length) {
+            for (var i = 0; i < data.rows.length; i++) {
+              $oMessageList.append(["<li>",data.rows[i].addtime,data.rows[i].content,"</li>"].join(" "));
+            }
+          }else {
+            $oMessageList.append("<li>没有消息！</li>");
           }
+
           showPopup("messagesPopup");
         }
 
@@ -1212,6 +1209,7 @@ function update() {
         }else if (status >= 0 ) {
           $("#coins .count").html(parseInt(data.money,10));
           hidePopup("topup");
+          fnGetLive();
           showAlert({
             msg: "您的体力恢复啦，继续挑战吧！",
             title: "恢复体力",
@@ -1372,6 +1370,9 @@ function update() {
     });
   });
   $(".buyCoins").click(showCoinsPopup);
+  $("#life .add").click(function () {
+    showPopup("topup");
+  });
 
   function showCoinsPopup() {
     $.ajax({
@@ -1532,6 +1533,7 @@ function update() {
       //alert('Failed because: ' + message);
   }
   function fnGetRankList(list) {
+    showLoading();
     var sListName;
     var $rankList = $("#rankPopup .ranklist");
     switch (list) {
@@ -1552,7 +1554,7 @@ function update() {
       url: serviceRoot + "index.php?m=game&v=" + sListName,
       success: function (data) {
         var status = parseInt(data.status, 10);
-
+        hideLoading();
         if ( status === -238) {
           showLogin();
         }else if (status >= 0 ) {
@@ -1575,6 +1577,12 @@ function update() {
   document.addEventListener("deviceready", onDeviceReady, false);
 
   function onDeviceReady() {
+    //StatusBar.show();
+    // alert(StatusBar.isVisible);
+    navigator.splashscreen.show();
+    setTimeout(function() {
+        navigator.splashscreen.hide();
+    }, 3000);
     if (AudioContext) {
       context = new AudioContext();
       oPinao = new Piano(context);

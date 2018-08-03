@@ -8,24 +8,8 @@
     "hash": "5eeb6201289c849b20bb74cb73d1b5b1"
   },
   {
-    "file": "easeljs-0.8.2.min.js",
-    "hash": "937c3ec68021211c056f61c9ceaccffd"
-  },
-  {
     "file": "game.html",
-    "hash": "ab9a987fa964e9cfde3bd0cda915c416"
-  },
-  {
-    "file": "images/bg.png",
-    "hash": "71b5cda8923250320eb852d66626c3fa"
-  },
-  {
-    "file": "images/bugani.png",
-    "hash": "2f38703a7f35ba234578ff72968e0eeb"
-  },
-  {
-    "file": "images/bugJump.png",
-    "hash": "b2a6a96f7e89f8922a3ac6d41237f520"
+    "hash": "5d75c76dc08d454185fecd8e885e24a9"
   },
   {
     "file": "images/buttonBg.png",
@@ -34,10 +18,6 @@
   {
     "file": "images/buttonGrayBg.png",
     "hash": "a613612ea4571db76f95a5da45961e4d"
-  },
-  {
-    "file": "images/buttonPlay.png",
-    "hash": "7ea46db7ba30ba34e4dcc9e4b0de76f1"
   },
   {
     "file": "images/buylife.png",
@@ -124,6 +104,10 @@
     "hash": "6707c004f6cfd1d5fcbdafde3653f5bd"
   },
   {
+    "file": "images/iconShare.png",
+    "hash": "ac9788c797dd6079723b466f8964cba4"
+  },
+  {
     "file": "images/jg@2x.png",
     "hash": "c4deba58ef2f4d09b95a7e361846aa10"
   },
@@ -188,12 +172,12 @@
     "hash": "6aef3609c6db78a1aba6d9f0ff75081a"
   },
   {
-    "file": "images/wrong@2x.png",
-    "hash": "675f14b73079d5fdacdadd02cfa41481"
+    "file": "images/wechatThumb.png",
+    "hash": "e98164df983a2b01662d698d951fa6db"
   },
   {
-    "file": "index.html",
-    "hash": "23c593fb3dafba4485093a8597e67bb6"
+    "file": "images/wrong@2x.png",
+    "hash": "675f14b73079d5fdacdadd02cfa41481"
   },
   {
     "file": "jquery.2.1.4.min.js",
@@ -309,7 +293,7 @@
   },
   {
     "file": "script.min.js",
-    "hash": "ee282fd2bea48442d6cc073c14da3463"
+    "hash": "7a929c686fcdb5626af2fb7b01052533"
   },
   {
     "file": "sprite.min.js",
@@ -317,6 +301,6 @@
   },
   {
     "file": "style.css",
-    "hash": "a1646d7b7ead11ca8697b4fe729ab1bd"
+    "hash": "dd6b618bd5736bf103b529acfaae187f"
   }
 ]

@@ -6,6 +6,7 @@ import sftp from 'gulp-sftp';
 import { exec } from 'child_process';
 import runSequence from 'run-sequence';
 import 'babel-polyfill';
+import del from 'del';
 
 const distDir = './cordova/www';
 gulp.task('webserver', () => gulp.src(distDir)
@@ -17,6 +18,10 @@ gulp.task('webserver', () => gulp.src(distDir)
     fallback: './index.html',
   })));
 
+gulp.task('clean', () => del([
+  // here we use a globbing pattern to match everything inside the `mobile` folder
+  `${distDir}/**/*`,
+]));
 gulp.task('copy', () => gulp.src(
   ['./src/game/piano/**/*', './src/game/*.html', './src/game/*.css', './src/game/*.min.js', './src/game/images/**/*'],
   { base: './src/game/' },
@@ -68,7 +73,7 @@ gulp.task('cordova-build', () => new Promise((resolve, reject) => {
   }, resolve);
 }));
 // gulp.task('build', ['copy', 'minify', 'cordova-hcp', 'cordova-prepare'], () => {});
-gulp.task('build', () => runSequence('copy', 'minify', 'cordova-hcp', 'cordova-prepare'));
+gulp.task('build', () => runSequence('clean', 'copy', 'minify', 'cordova-hcp', 'cordova-prepare'));
 // gulp.task('deploy', ['build', 'cordova-build', 'sftp-resources', 'sftp-app'], () => {});
 
 gulp.task('deploy', () => runSequence('build', 'cordova-build', 'sftp-resources', 'sftp-app'));

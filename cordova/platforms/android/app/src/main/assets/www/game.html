@@ -48,6 +48,7 @@
         <img id="buttonNews" src="./images/iconNews.png" />
         <img id="buttonOption" src="./images/iconOption.png" />
         <img id="buttonRank" src="./images/iconRank.png" />
+        <img id="buttonShare" src="./images/iconShare.png" />
       </div>
       <div class="fakeBG GstartScreen">
         <div></div><div class="bk"></div><div></div><div class="bk"></div>
@@ -121,9 +122,9 @@
         <div class="inner">
           <h1><img height="35" src="./images/FontRank@2x.png" /></h1>
           <ul class="tab">
-            <li class="cur" data-list="1">单盘最高</li>
-            <li data-list="2">本周最高</li>
-            <li data-list="3">当日最高</li>
+            <li class="cur" data-list="1">大师赛</li>
+            <li data-list="2">周耐力赛</li>
+            <li data-list="3">日耐力赛</li>
           </ul>
           <ul class="ranklist">
 
@@ -192,40 +193,29 @@
         </div>
         <button class="button01 priceButton"><span class="count"></span></button>
       </div> -->
-      <div id="help" class="popup" onClick="hideHelp()">
+      <!-- <div id="help" class="popup" onClick="hideHelp()">
         <p style="color: rgb(248,6,0);font-weight: 700;font-size: 21pt;margin-top: 165px;">不要触到任何白块!</p>
         <p id="helpDetails" style="color: rgb(10,251,15);font-weight: 700;font-size: 17pt;margin-top: 5px;"></p>
         <p style="color: rgb(235, 243, 236);font-weight: 700;font-size: 12pt;margin-top: 195px;"></p>
-      </div>
+      </div> -->
       <canvas id="game" width="398" height="598" style=""></canvas>
 
 
-      <div class="popup propPop" id="gameoverBlock">
+      <div class="popup propPop" id="revivePopup">
         <div class="close againClose"></div>
         <img class="cover" src="./images/revive.png" width="100%" />
         <div class="desc small">不甘心哇~我要复活，要复活！<br/>复活后，速度变慢，分数继续哦。</div>
 
         <div class="magicButton"><img width="30%" src="./images/FontLive@2x.png" /></div>
         <button class="button01 priceButton reviveButton"><span class="count revivePrice"></span></button>
+      </div>
 
-        <!-- <div class="">
-          <p id="score" class="score BlackText">失败!</p>
-          <p id="best" class="best BlackText">00</p>
-          <div id="footer" class="footer"> -->
-            <!-- <a id="exit" onclick='randomPlay();'>退出</a> -->
-            <!-- <a id="again" class="againLink">重来</a>
-            <span id="buyLife" style="display:none;">行动点用尽，
-            <a onclick='buyLife()' class="linkOut">点击购买行动点</a></span>
-          </div>
-        </div>
-
-        <div class="magicButton reviveButton">
-          <div class="title">
-            复活
-          </div>
-          <i class="fa fa-money"></i> <span class="count revivePrice">2</span>
-          <div class="sub">复活后速度变慢，分数继续哦。</div>
-        </div> -->
+      <div class="popup propPop" id="gameOverPopup">
+        <div class="close"></div>
+        <img class="cover" src="./images/revive.png" width="100%" />
+        <div class="desc">得分 <span>0</span></div>
+        <div class="maxScore">今日最高分 <span class="score">10000</span></div>
+        <button class="button01 startGameButton" type="button" name="button">再来一盘</button>
       </div>
 
       <!-- <div id="gameoverBlockwin">
@@ -263,8 +253,9 @@
 
 
   </div>
-  <i id="loadingAni" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-  <div id="loadingOverlay"></div>
+  <div id="loadingAni">
+    <div class="lds-ripple"><div></div><div></div></div>
+  </div>
 <script type="text/javascript" src="cordova.js"></script>
 <script src="./script.min.js?rnd=130" type="text/javascript"></script>
 

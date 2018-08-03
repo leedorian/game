@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="cn.joycells" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>别碰白块</name>
+    <name>欢乐白块</name>
     <description>
     </description>
     <author email="leedorian@gmail.com" href="http://joycells.cn">
@@ -34,6 +34,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="Fullscreen" value="true" />
+    <preference name="android-manifest/application/activity/@android:theme" value="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
     <preference name="orientation" value="portrait" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
@@ -48,8 +49,12 @@
         <variable name="WECHATAPPID" value="wxde833bddadcdeb1d" />
     </plugin>
     <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-plugin-vibration" spec="^3.1.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="android" spec="^7.0.0" />
 </widget>

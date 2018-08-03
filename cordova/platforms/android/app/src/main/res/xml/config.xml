@@ -26,7 +26,14 @@
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
-    <name>别碰白块</name>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <name>欢乐白块</name>
     <description>
     </description>
     <author email="leedorian@gmail.com" href="http://joycells.cn">
@@ -60,9 +67,11 @@
     <preference name="loadUrlTimeoutValue" value="60000" />
     <preference name="WECHATAPPID" value="wxde833bddadcdeb1d" />
     <preference name="Fullscreen" value="true" />
+    <preference name="android-manifest/application/activity/@android:theme" value="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
     <preference name="orientation" value="portrait" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
 </widget>
