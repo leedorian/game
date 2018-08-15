@@ -47,7 +47,6 @@ button{
   margin: auto;
   text-align: center;
 }
-
 #main {
   display: none;
   width: 100%;
@@ -631,7 +630,7 @@ button{
   background-size: contain;
 }
 .rankpopup .ranklist li:nth-child(3) .ranking{
-  background-image: url(./images/No2.png);
+  background-image: url(./images/No3.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -851,6 +850,10 @@ button{
   height:51px;
   line-height: 51px;
   font-size: 1rem;
+}
+#gameOverPopup .cover{
+  padding:20px;
+  box-sizing: border-box;
 }
 /**
  * Loading spinner

@@ -4,12 +4,24 @@
     "hash": "b6b92154f4eb4eef25df7373f5ebb759"
   },
   {
+    "file": "bgm/battle8.mp3",
+    "hash": "74783108a075215bc76a05dd6d1936ae"
+  },
+  {
+    "file": "bgm/lone-wolf-short.wav",
+    "hash": "b12945f4b6edfca0e9043dfbe6f5de76"
+  },
+  {
     "file": "cordova_redirect.html",
     "hash": "5eeb6201289c849b20bb74cb73d1b5b1"
   },
   {
     "file": "game.html",
-    "hash": "5d75c76dc08d454185fecd8e885e24a9"
+    "hash": "fdd2e5e91d44faeddb4442a98690de8a"
+  },
+  {
+    "file": "images/backgroundTexture.jpg",
+    "hash": "15a4bd73b13d91a3ebe5c6b83bc1c0a4"
   },
   {
     "file": "images/buttonBg.png",
@@ -66,6 +78,10 @@
   {
     "file": "images/gameLogo.png",
     "hash": "ab89f57116be6a81e7cc71d24eb7f0ab"
+  },
+  {
+    "file": "images/gameOver@2x.png",
+    "hash": "1f42f02cfee8eb6d200dd3d85d1ad2e5"
   },
   {
     "file": "images/headMoren.png",
@@ -162,6 +178,10 @@
   {
     "file": "images/sp5@2x.png",
     "hash": "b448e8201c4ceee43c479ab34e7d789a"
+  },
+  {
+    "file": "images/texture.jpg",
+    "hash": "574afc824ba1bcddddbce1ec00b822da"
   },
   {
     "file": "images/title@2x.png",
@@ -293,7 +313,7 @@
   },
   {
     "file": "script.min.js",
-    "hash": "7a929c686fcdb5626af2fb7b01052533"
+    "hash": "328cf17220d78ddd108e232eb2700c52"
   },
   {
     "file": "sprite.min.js",
@@ -301,6 +321,6 @@
   },
   {
     "file": "style.css",
-    "hash": "dd6b618bd5736bf103b529acfaae187f"
+    "hash": "aa96a564f88476d4ef090ebd47ed5510"
   }
 ]

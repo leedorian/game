@@ -1,7 +1,6 @@
 {
   "name": "joycells",
   "android_identifier": "cn.joycells",
-  "update": "now",
   "content_url": "http://47.98.97.163:8011/game/",
   "min_native_interface": 1
 }

@@ -23,7 +23,7 @@ gulp.task('clean', () => del([
   `${distDir}/**/*`,
 ]));
 gulp.task('copy', () => gulp.src(
-  ['./src/game/piano/**/*', './src/game/*.html', './src/game/*.css', './src/game/*.min.js', './src/game/images/**/*'],
+  ['./src/game/piano/**/*', './src/game/bgm/**/*', './src/game/*.html', './src/game/*.css', './src/game/*.min.js', './src/game/images/**/*'],
   { base: './src/game/' },
 ).pipe(gulp.dest(distDir)));
 
